@@ -2,25 +2,12 @@
 
 var express = require('express'),
   config = require('./config/config'),
-  db = require('./app/models'),
-  epilogue = require('epilogue');
+  db = require('./app/models');
 
 
 var app = express();
 
 require('./config/express')(app, config);
-// Initialize epilogue
-epilogue.initialize({
-  app: app,
-  sequelize: db.sequelize
-});
-
-// Create REST resource
-var userResource = epilogue.resource({
-  model: Animal,
-  endpoints: ['/api/animals', '/api/animals/:id']
-});
-
 
 db.sequelize
   .sync()
