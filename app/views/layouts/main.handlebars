@@ -23,8 +23,11 @@
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="js/ie-emulation-modes-warning.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+    <script src="js/angular.min.js"></script>
     <script src="js/core.js"></script>
+    <script src="js/angular-loading-spinner.js"></script>
+    <script src="js/angular-spinner.min.js"></script>
+    <script src="js/spin.min.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -33,7 +36,7 @@
     <![endif]-->
   </head>
 
-  <body  ng-app="app">
+  <body  ng-app="app" ng-cloak>
 
     {{> nav-top}}
 

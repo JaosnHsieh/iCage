@@ -1,11 +1,13 @@
 <div ng-controller="animalCtrl">
+<span us-spinner="{radius:30, width:8, length: 16}"></span>
 
+<button ng-click="autofill()">b</button>
 <h1 class="page-header">動物管理</h1>
         <ul class="nav nav-tabs">
-          <li>
+          <li class="active">
             <a  href="#1" data-toggle="tab" id="list">動物列表</a>
           </li>
-          <li class="active"><a href="#2" data-toggle="tab" id="add">新增動物資料</a>
+          <li><a href="#2" data-toggle="tab" id="add">新增動物資料</a>
           </li>
           <li><a href="#3" data-toggle="tab" id="edit" ng-show="editAnimal!=null">編輯動物資料</a>
           </li>
@@ -13,7 +15,7 @@
 
         <div class="tab-content ">
 
-          <div class="tab-pane" id="1">
+          <div class="tab-pane active" id="1">
 
 
                 <div class="panel panel-primary">
@@ -24,7 +26,7 @@
                     <table class="table table-bordered table-striped">
 
                       <thead>
-                        <td>編輯/刪除</td>
+                        <td style="width:6em;">編輯/刪除</td>
                         <td>欄/籠號</td>
                         <td>動物編號</td>
                         <td>性別</td>
@@ -47,7 +49,7 @@
                             </div>
                           </td>
                           <td>{[{a.cageNo}]}</td>
-                          <td>{[{a.aniamlNo}]}</td>
+                          <td>{[{a.animalNo}]}</td>
                           <td>{[{a.sex}]}</td>
                           <td>{[{a.birth}]}</td>
                           <td>{[{a.iacuc}]}</td>
@@ -64,7 +66,7 @@
                  
           </div>
 
-          <div class="tab-pane active" id="2">
+          <div class="tab-pane" id="2">
             
               <div class="panel panel-primary">
 

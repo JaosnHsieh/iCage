@@ -1,4 +1,5 @@
-var express = require('express'),
+'use strict'
+let express = require('express'),
   router = express.Router(),
   db = require('../models'),
   moment = require('moment');
@@ -6,6 +7,9 @@ var express = require('express'),
 module.exports = function (app) {
   app.use('/api', router);
 };
+
+
+//// Aniaml table start
 
 router.get('/animals',(req,res)=>{
     db.Animal.findAll()
@@ -21,8 +25,8 @@ router.post('/animals',(req,res)=>{
 
   console.log(moment().format('YYYY-MM-DD HH:mm:ss.SSS'));
     
-    var data = req.body;
-    var animal = db.Animal.build();
+    let data = req.body;
+    let animal = db.Animal.build();
 
       c(req.body);
 
@@ -54,10 +58,10 @@ router.post('/animals',(req,res)=>{
 
 });
 
-router.put('/animals', function (req, res, next) {
+router.put('/animals', (req, res, next) => {
     
-        var animal = req.body;
-        
+        let animal = req.body;
+        animal.updatedAt = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
         // search for attributes
         db.Animal.findOne({ where: {idNo: animal.idNo} }).then(function(data) {
         // project will be the first entry of the Projects table with the title 'aProject' || null
@@ -71,10 +75,10 @@ router.put('/animals', function (req, res, next) {
     
 });
 
-router.delete('/animals', function (req, res, next) {
+router.delete('/animals', (req, res, next) => {
 
         
-        var animal = req.body;
+        let animal = req.body;
         
         db.Animal.destroy({ where: {idNo: animal.idNo} }).then(function(data) {
           
@@ -84,3 +88,74 @@ router.delete('/animals', function (req, res, next) {
       
     
 });
+
+//// animal table end
+
+
+//// cage table start
+
+router.get('/cages',(req,res)=>{
+    db.Cage.findAll()
+      .then((data)=>{
+        res.send(data);
+      })
+      .catch((err)=>{
+        res.send(err);
+      });
+});
+
+router.post('/cages',(req,res)=>{
+
+    
+    let data = req.body;
+    let cage = db.Cage.build();
+
+        cage.idNo = data.idNo;
+        cage.name = data.name;
+        cage.status = data.status;
+        cage.memo = data.memo;
+        cage.updatedAt = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
+        cage.createdAt = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
+        
+        cage.save()
+        .then(function(data){
+          res.status(200).send('cage inserted successfully');
+        })
+        .catch(function(err){
+          console.log('err',err);
+        });
+
+});
+
+router.put('/cages',(req, res, next) => {
+    
+        let cage = req.body;
+        
+        console.log(cage);
+        // search for attributes
+        db.Cage.findOne({ where: {idNo: cage.idNo} }).then(function(data) {
+        // project will be the first entry of the Projects table with the title 'aProject' || null
+        data.updateAttributes(cage).then(function(cage) {
+                        res.json(cage);
+                      });
+
+          });
+      
+    
+});
+
+router.delete('/cages', (req, res, next) => {
+
+        
+        let cage = req.body;
+        
+        db.Cage.destroy({ where: {idNo: cage.idNo} }).then(function(data) {
+          
+              res.send('delete succesffully');
+      
+          });
+      
+    
+});
+
+//// cage table end
