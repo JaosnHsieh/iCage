@@ -10,7 +10,7 @@ app.config(function($interpolateProvider) {
   $interpolateProvider.endSymbol('}]}');
 });
 
-
+//// Animal Controller Start
 app.controller('animalCtrl', function($scope, $filter, $q, $http) {
     
     
@@ -89,9 +89,9 @@ app.controller('animalCtrl', function($scope, $filter, $q, $http) {
    
 
 });
+//// Animal Controller End
 
-
-
+//// Cage Controller Start
 app.controller('cageCtrl', function($scope, $filter, $q, $http) {
     
     
@@ -166,3 +166,83 @@ app.controller('cageCtrl', function($scope, $filter, $q, $http) {
    
 
 });
+//// Cage Controller End
+
+
+//// Strains Controller Start
+app.controller('strainCtrl', function($scope, $filter, $q, $http) {
+    
+    
+
+    $http.get('/api/strains').success(function(data){
+      $scope.strains = data;
+    });
+
+    $scope.addStrain = function(){
+
+        $http({ 
+                            method :  'POST' , 
+                            url :  '/api/strains' , 
+                            data :  $scope.strain, 
+                            headers :  { 'Content-Type' :  'application/json' } 
+                })
+                .success(function(strain){
+
+                   $http.get('/api/strains').success(function(data){
+                                 $scope.strains = data;
+                                 $scope.strain = null;
+                                 $("#list").tab('show');
+
+                              });
+
+                });
+        
+    };
+
+    $scope.updateStrain = function(c){
+          $scope.editStrain = c;
+          $('#edit').tab('show');
+    };
+
+    $scope.submitUpdateStrain = function(){
+          
+          $http({ 
+                            method :  'PUT' , 
+                            url :  '/api/strains' , 
+                            data :  $scope.editStrain, 
+                            headers :  { 'Content-Type' :  'application/json' } 
+                })
+                .success(function(strain){
+                             $scope.editStrain = null;
+                             $http.get('/api/strains').success(function(data){
+                                 $scope.strains = data;
+                                 $('#list').tab('show');
+
+                              });
+
+                });
+
+    };
+
+    $scope.deleteStrain = function(a){
+
+        $http({ 
+                            method :  'DELETE' , 
+                            url :  '/api/strains' , 
+                            data :  a, 
+                            headers :  { 'Content-Type' :  'application/json' } 
+                })
+                .success(function(strain){
+                             
+                             $http.get('/api/strains').success(function(data){
+                                 $scope.strains = data;
+                              });
+
+                });
+    };
+
+   
+
+});
+
+////Strain Controller End

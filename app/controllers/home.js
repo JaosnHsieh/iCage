@@ -24,3 +24,7 @@ router.get('/cages', function (req, res, next) {
       cages:'active'
     });
 });
+
+router.get('/strains', function (req, res, next) {
+    res.render('strains');
+});

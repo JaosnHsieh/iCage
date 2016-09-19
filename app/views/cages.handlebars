@@ -69,15 +69,7 @@
 
                   <form name="cageForm" ng-submit="addCage()" novalidate>
 
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <label for="">編號<strong class="text-danger">*(必填)</strong></label>
-                       
-                        
-                            <input class="form-control" type="text" ng-model="cage.idNo">
-                        </div>
-                        
-                    </div>
+                   
 
                     <div class="form-group row">
                         <div class="col-sm-12">
@@ -110,7 +102,7 @@
                     </div>
                     
                       <div class="form-group row">
-                        <input class="form-control" type="submit">
+                        <input class="form-control  btn-primary" type="submit">
                       </div>
 
                   </form>
@@ -138,7 +130,7 @@
                             <label for="">編號<strong class="text-danger">*(必填)</strong></label>
                        
                         
-                            <input class="form-control" type="text" ng-model="editCage.idNo">
+                            <input class="form-control" type="text" ng-model="editCage.idNo" ng-disabled="true">
                         </div>
                         
                     </div>
@@ -174,7 +166,7 @@
                     </div>
                     
                       <div class="form-group row">
-                        <input class="form-control" type="submit">
+                        <input class="form-control  btn-primary" type="submit">
                       </div>
 
                   </form>

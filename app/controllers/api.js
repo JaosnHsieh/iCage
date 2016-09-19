@@ -110,7 +110,6 @@ router.post('/cages',(req,res)=>{
     let data = req.body;
     let cage = db.Cage.build();
 
-        cage.idNo = data.idNo;
         cage.name = data.name;
         cage.status = data.status;
         cage.memo = data.memo;
@@ -150,6 +149,74 @@ router.delete('/cages', (req, res, next) => {
         let cage = req.body;
         
         db.Cage.destroy({ where: {idNo: cage.idNo} }).then(function(data) {
+          
+              res.send('delete succesffully');
+      
+          });
+      
+    
+});
+
+//// cage table end
+
+
+
+//// cage table start
+
+router.get('/strains',(req,res)=>{
+    db.Strain.findAll()
+      .then((data)=>{
+        res.send(data);
+      })
+      .catch((err)=>{
+        res.send(err);
+      });
+});
+
+router.post('/strains',(req,res)=>{
+
+    
+    let data = req.body;
+    let strain = db.Strain.build();
+
+        strain.name = data.name;
+        strain.memo = data.memo;
+        strain.updatedAt = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
+        strain.createdAt = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
+        
+        strain.save()
+        .then(function(data){
+          res.status(200).send('strain inserted successfully');
+        })
+        .catch(function(err){
+          console.log('err',err);
+        });
+
+});
+
+router.put('/strains',(req, res, next) => {
+    
+        let strain = req.body;
+        
+        console.log(strain);
+        // search for attributes
+        db.Strain.findOne({ where: {idNo: strain.idNo} }).then(function(data) {
+        // project will be the first entry of the Projects table with the title 'aProject' || null
+        data.updateAttributes(strain).then(function(strain) {
+                        res.json(strain);
+                      });
+
+          });
+      
+    
+});
+
+router.delete('/strains', (req, res, next) => {
+
+        
+        let strain = req.body;
+        
+        db.Strain.destroy({ where: {idNo: strain.idNo} }).then(function(data) {
           
               res.send('delete succesffully');
       

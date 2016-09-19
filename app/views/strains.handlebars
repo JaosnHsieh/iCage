@@ -1,0 +1,161 @@
+<div ng-controller="strainCtrl">
+<span us-spinner="{radius:30, width:8, length: 16}"></span>
+
+<h1 class="page-header">Strain table</h1>
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <a  href="#1" data-toggle="tab" id="list">Strains List</a>
+          </li>
+          <li><a href="#2" data-toggle="tab" id="add">Add</a>
+          </li>
+          <li><a href="#3" data-toggle="tab" id="edit" ng-show="editStrain!=null">Edit</a>
+          </li>
+        </ul>
+
+        <div class="tab-content ">
+
+          <div class="tab-pane active" id="1">
+
+
+                <div class="panel panel-primary">
+
+                  <div class="panel-heading"></div>
+                  <div class="panel-body">
+
+                    <table class="table table-bordered table-striped">
+
+                      <thead>
+                        <td style="width:6em;">Edit/Delete</td>
+                        <td>idNo</td>
+                        <td>Name</td>
+                        <td>Memo</td>
+                      </thead>
+
+                      <tbody>
+                        <tr ng-repeat="s in strains">
+                          <td>
+                            <a class="btn btn-info btn-block" ng-click="updateStrain(s)">編輯</a>
+                            <div class="dropdown">
+                                <button class="btn btn-danger btn-block dropdown-toggle" type="button" data-toggle="dropdown">刪除
+                                </button>
+                                <ul class="dropdown-menu">
+                                  <li class="btn btn-danger btn-block" ng-click="deleteStrain(s)">是</li>
+                                  <li class="btn btn-primary btn-block">否</li>
+                                </ul>
+                            </div>
+                          </td>
+                          <td>{[{s.idNo}]}</td>
+                          <td>{[{s.name}]}</td>
+                          <td>{[{s.memo}]}</td>
+                        </tr>
+                      </tbody>
+                    
+                    </table>
+
+                  </div>
+
+                </div>
+
+                 
+          </div>
+
+          <div class="tab-pane" id="2">
+            
+              <div class="panel panel-primary">
+
+                <div class="panel-heading"></div>
+                <div class="panel-body">
+
+                  <form name="strainForm" ng-submit="addStrain()" novalidate>
+
+                 
+
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label for="">Name<strong class="text-danger">*(必填)</strong></label>
+                       
+                        
+                            <input class="form-control" type="text" ng-model="strain.name">
+                        </div>
+                        
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label for="">memo<strong class="text-danger">*(必填)</strong></label>
+                       
+                        
+                            <input class="form-control" type="text" ng-model="strain.memo">
+                        </div>
+                        
+                    </div>
+
+                   
+
+
+                  
+                      <div class="form-group row">
+                        <input class="form-control  btn-primary" type="submit">
+                      </div>
+
+                  </form>
+
+                </div>
+
+              </div>
+               
+
+
+          </div>
+          <div class="tab-pane" id="3">
+            
+              <div class="panel panel-primary">
+
+                <div class="panel-heading"></div>
+                <div class="panel-body">
+
+                     <form name="strainForm" ng-submit="submitUpdateStrain()" novalidate>
+
+
+
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label for="">Name<strong class="text-danger">*(必填)</strong></label>
+                       
+                        
+                            <input class="form-control" type="text" ng-model="editStrain.name">
+                        </div>
+                        
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label for="">memo<strong class="text-danger">*(必填)</strong></label>
+                       
+                        
+                            <input class="form-control" type="text" ng-model="editStrain.memo">
+                        </div>
+                        
+                    </div>
+
+                   
+
+
+                  
+                      <div class="form-group row">
+                        <input class="form-control btn-primary" type="submit">
+                      </div>
+
+                  </form>
+
+                  
+                </div>
+
+              </div>
+
+
+
+          </div>
+        </div>
+
+</div>
