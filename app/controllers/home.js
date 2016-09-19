@@ -28,3 +28,7 @@ router.get('/cages', function (req, res, next) {
 router.get('/strains', function (req, res, next) {
     res.render('strains');
 });
+
+router.get('/events', function (req, res, next) {
+    res.render('events');
+});

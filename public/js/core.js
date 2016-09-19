@@ -246,3 +246,83 @@ app.controller('strainCtrl', function($scope, $filter, $q, $http) {
 });
 
 ////Strain Controller End
+
+
+
+//// events Controller Start
+app.controller('eventCtrl', function($scope, $filter, $q, $http) {
+    
+    
+
+    $http.get('/api/events').success(function(data){
+      $scope.events = data;
+    });
+
+    $scope.addEvent = function(){
+
+        $http({ 
+                            method :  'POST' , 
+                            url :  '/api/events' , 
+                            data :  $scope.event, 
+                            headers :  { 'Content-Type' :  'application/json' } 
+                })
+                .success(function(event){
+
+                   $http.get('/api/events').success(function(data){
+                                 $scope.events = data;
+                                 $scope.event = null;
+                                 $("#list").tab('show');
+
+                              });
+
+                });
+        
+    };
+
+    $scope.updateEvent = function(e){
+          $scope.editEvent = e;
+          $('#edit').tab('show');
+    };
+
+    $scope.submitUpdateEvent = function(){
+          
+          $http({ 
+                            method :  'PUT' , 
+                            url :  '/api/events' , 
+                            data :  $scope.editEvent, 
+                            headers :  { 'Content-Type' :  'application/json' } 
+                })
+                .success(function(event){
+                             $scope.editEvent = null;
+                             $http.get('/api/events').success(function(data){
+                                 $scope.events = data;
+                                 $('#list').tab('show');
+
+                              });
+
+                });
+
+    };
+
+    $scope.deleteEvent = function(e){
+
+        $http({ 
+                            method :  'DELETE' , 
+                            url :  '/api/events' , 
+                            data :  e, 
+                            headers :  { 'Content-Type' :  'application/json' } 
+                })
+                .success(function(event){
+                             
+                             $http.get('/api/events').success(function(data){
+                                 $scope.events = data;
+                              });
+
+                });
+    };
+
+   
+
+});
+
+////Strain Controller End

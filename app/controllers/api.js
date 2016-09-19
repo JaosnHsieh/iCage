@@ -161,7 +161,7 @@ router.delete('/cages', (req, res, next) => {
 
 
 
-//// cage table start
+//// strain table start
 
 router.get('/strains',(req,res)=>{
     db.Strain.findAll()
@@ -225,4 +225,74 @@ router.delete('/strains', (req, res, next) => {
     
 });
 
-//// cage table end
+//// strain table end
+
+
+
+
+//// event table start
+
+router.get('/events',(req,res)=>{
+    db.Event.findAll()
+      .then((data)=>{
+        res.send(data);
+      })
+      .catch((err)=>{
+        res.send(err);
+      });
+});
+
+router.post('/events',(req,res)=>{
+
+    
+    let data = req.body;
+    let event = db.Event.build();
+
+        event.name = data.name;
+        event.inOut = data.inOut;
+        event.memo = data.memo;
+        event.updatedAt = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
+        event.createdAt = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
+        
+        event.save()
+        .then(function(data){
+          res.status(200).send('event inserted successfully');
+        })
+        .catch(function(err){
+          console.log('err',err);
+        });
+
+});
+
+router.put('/events',(req, res, next) => {
+    
+        let event = req.body;
+        
+        console.log(event);
+        // search for attributes
+        db.Event.findOne({ where: {idNo: event.idNo} }).then(function(data) {
+        // project will be the first entry of the Projects table with the title 'aProject' || null
+        data.updateAttributes(event).then(function(event) {
+                        res.json(event);
+                      });
+
+          });
+      
+    
+});
+
+router.delete('/events', (req, res, next) => {
+
+        
+        let event = req.body;
+        
+        db.Event.destroy({ where: {idNo: event.idNo} }).then(function(data) {
+          
+              res.send('delete succesffully');
+      
+          });
+      
+    
+});
+
+//// event table end
