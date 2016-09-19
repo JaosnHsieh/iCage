@@ -1,6 +1,5 @@
 <div ng-controller="animalCtrl">
 
-
 <h1 class="page-header">動物管理</h1>
         <ul class="nav nav-tabs">
           <li>
@@ -8,7 +7,7 @@
           </li>
           <li class="active"><a href="#2" data-toggle="tab" id="add">新增動物資料</a>
           </li>
-          <li><a href="#3" data-toggle="tab" id="edit">編輯動物資料</a>
+          <li><a href="#3" data-toggle="tab" id="edit" ng-show="editAnimal!=null">編輯動物資料</a>
           </li>
         </ul>
 
@@ -25,7 +24,7 @@
                     <table class="table table-bordered table-striped">
 
                       <thead>
-                        <td>編輯</td>
+                        <td>編輯/刪除</td>
                         <td>欄/籠號</td>
                         <td>動物編號</td>
                         <td>性別</td>
@@ -36,7 +35,17 @@
 
                       <tbody>
                         <tr ng-repeat="a in animals">
-                          <td><button ng-click="updateAnimal(a)">編輯</button></td>
+                          <td>
+                            <a class="btn btn-info btn-block" ng-click="updateAnimal(a)">編輯</a>
+                            <div class="dropdown">
+                                <button class="btn btn-danger btn-block dropdown-toggle" type="button" data-toggle="dropdown">刪除
+                                </button>
+                                <ul class="dropdown-menu">
+                                  <li class="btn btn-danger btn-block" ng-click="deleteAnimal(a)">是</li>
+                                  <li class="btn btn-primary btn-block">否</li>
+                                </ul>
+                            </div>
+                          </td>
                           <td>{[{a.cageNo}]}</td>
                           <td>{[{a.aniamlNo}]}</td>
                           <td>{[{a.sex}]}</td>
@@ -62,7 +71,7 @@
                 <div class="panel-heading"></div>
                 <div class="panel-body">
 
-                  <form name="animalForm" ng-submit="processForm()" novalidate>
+                  <form name="animalForm" ng-submit="addAnimal()" novalidate>
 
                     <div class="form-group row">
                         <div class="col-sm-12">
@@ -225,7 +234,7 @@
                 <div class="panel-heading"></div>
                 <div class="panel-body">
 
-                  <form name="animalForm" ng-submit="processForm()" novalidate>
+                  <form name="animalForm" ng-submit="submitUpdateAnimal()" novalidate>
 
                     <div class="form-group row">
                         <div class="col-sm-12">

@@ -15,10 +15,9 @@ app.controller('animalCtrl', function($scope, $filter, $q, $http) {
     
     $http.get('/api/animals').success(function(data){
       $scope.animals = data;
-      console.log(123);
     });
 
-    $scope.processForm = function(){
+    $scope.addAnimal = function(){
 
         $http({ 
                             method :  'POST' , 
@@ -27,7 +26,13 @@ app.controller('animalCtrl', function($scope, $filter, $q, $http) {
                             headers :  { 'Content-Type' :  'application/json' } 
                 })
                 .success(function(animal){
-                             $("#list").tab('show');
+
+                   $http.get('/api/animals').success(function(data){
+                                 $scope.animals = data;
+                                 $scope.animal = null;
+                                 $("#list").tab('show');
+
+                              });
 
                 });
         
@@ -36,6 +41,43 @@ app.controller('animalCtrl', function($scope, $filter, $q, $http) {
     $scope.updateAnimal = function(a){
           $scope.editAnimal = a;
           $('#edit').tab('show');
+    };
+
+    $scope.submitUpdateAnimal = function(a){
+          
+          $http({ 
+                            method :  'PUT' , 
+                            url :  '/api/animals' , 
+                            data :  $scope.editAnimal, 
+                            headers :  { 'Content-Type' :  'application/json' } 
+                })
+                .success(function(animal){
+                             $scope.editAnimal = null;
+                             $http.get('/api/animals').success(function(data){
+                                 $scope.animals = data;
+                                 $('#list').tab('show');
+
+                              });
+
+                });
+
+    };
+
+    $scope.deleteAnimal = function(a){
+
+        $http({ 
+                            method :  'DELETE' , 
+                            url :  '/api/animals' , 
+                            data :  a, 
+                            headers :  { 'Content-Type' :  'application/json' } 
+                })
+                .success(function(animal){
+                             
+                             $http.get('/api/animals').success(function(data){
+                                 $scope.animals = data;
+                              });
+
+                });
     };
 
    

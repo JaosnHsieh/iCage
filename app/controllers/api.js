@@ -53,3 +53,34 @@ router.post('/animals',(req,res)=>{
         });
 
 });
+
+router.put('/animals', function (req, res, next) {
+    
+        var animal = req.body;
+        
+        // search for attributes
+        db.Animal.findOne({ where: {idNo: animal.idNo} }).then(function(data) {
+        // project will be the first entry of the Projects table with the title 'aProject' || null
+        data.updateAttributes(animal).then(function(todo) {
+                        res.json(todo);
+                        console.log('update successfully');
+                      });
+
+          });
+      
+    
+});
+
+router.delete('/animals', function (req, res, next) {
+
+        
+        var animal = req.body;
+        
+        db.Animal.destroy({ where: {idNo: animal.idNo} }).then(function(data) {
+          
+              res.send('delete succesffully');
+      
+          });
+      
+    
+});
