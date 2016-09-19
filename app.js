@@ -19,3 +19,4 @@ db.sequelize
     throw new Error(e);
   });
 
+global.c = console.log;
