@@ -297,3 +297,7 @@ router.delete('/events', (req, res, next) => {
 });
 
 //// event table end
+
+router.get('/users',function(req,res){
+  res.json({data:{items:{name:'jason',email:'haha'},Count:5}});
+});

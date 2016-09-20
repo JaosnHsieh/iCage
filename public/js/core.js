@@ -1,19 +1,23 @@
-var app = angular.module('app', ['ngLoadingSpinner']);
+var app = angular.module('app', ['ngLoadingSpinner','angularUtils.directives.dirPagination']);
 app.config(['$locationProvider', function($locationProvider){
     $locationProvider.html5Mode(true);    
 }]);
 
 // app.controler('mainController',function mainController($scope, $http) {   
 // });
-app.config(function($interpolateProvider) {
+app.config(function($interpolateProvider,paginationTemplateProvider) {
   $interpolateProvider.startSymbol('{[{');
   $interpolateProvider.endSymbol('}]}');
+  paginationTemplateProvider.setPath('/js/dirPagination.tpl.html');
+
 });
+
 
 //// Animal Controller Start
 app.controller('animalCtrl', function($scope, $filter, $q, $http) {
     
-    
+    $scope.pageSize = 5;
+
     $scope.autofill = function(){
           $scope.animal = {"customerId":"0101","animalNo":"1010","status":"10101","strainId":"010","strainNam":"10","strainCategory":"010","cageId":"10","cageNo":"010","sex":"10","weight":"010","memo":"010","resume":"10","iacuc":"010","birth":"01"};
     };
