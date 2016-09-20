@@ -16,6 +16,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: true
     },
+    ip: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     memo: {
       type: DataTypes.STRING,
       allowNull: true

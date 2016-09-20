@@ -28,6 +28,7 @@
                         <td>籠號</td>
                         <td>名稱</td>
                         <td>狀態</td>
+                        <td>感應器</td>
                         <td>備註</td>
                       </thead>
 
@@ -47,6 +48,11 @@
                           <td>{[{c.idNo}]}</td>
                           <td>{[{c.name}]}</td>
                           <td>{[{c.status}]}</td>
+                          <td>{[{c.ip}]}
+                            <button ng-click="openCam(c)" class="btn btn-primary">觀看</button>
+                            <button class="btn btn-info" ng-click="turnOnCam(c)">開啟</button>
+                            <button class="btn btn-waring" ng-click="turnOffCam(c)">關閉</button>
+                          </td>
                           <td>{[{c.memo}]}</td>
                         </tr>
                       </tbody>
@@ -87,6 +93,16 @@
                        
                         
                             <input class="form-control" type="text" ng-model="cage.status">
+                        </div>
+                        
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label for="">感應器ip<strong class="text-danger">*(必填)</strong></label>
+                       
+                        
+                            <input class="form-control" type="text" ng-model="cage.ip">
                         </div>
                         
                     </div>
@@ -151,6 +167,16 @@
                        
                         
                             <input class="form-control" type="text" ng-model="editCage.status">
+                        </div>
+                        
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label for="">感應器IP<strong class="text-danger">*(必填)</strong></label>
+                       
+                        
+                            <input class="form-control" type="text" ng-model="editCage.ip">
                         </div>
                         
                     </div>

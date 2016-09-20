@@ -163,7 +163,16 @@ app.controller('cageCtrl', function($scope, $filter, $q, $http) {
                 });
     };
 
-   
+    $scope.openCam = function(c){
+        window.open('http://'+c.ip+':8090?name='+c.name, "", "width=680,height=520");
+    };
+    $scope.turnOnCam = function(c){
+        $http.get('http://'+c.ip+':8090'+'/on');
+    };
+    $scope.turnOffCam = function(c){
+        $http.get('http://'+c.ip+':8090'+'/off');
+
+    };
 
 });
 //// Cage Controller End

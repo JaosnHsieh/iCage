@@ -112,6 +112,7 @@ router.post('/cages',(req,res)=>{
 
         cage.name = data.name;
         cage.status = data.status;
+        cage.ip = data.ip;
         cage.memo = data.memo;
         cage.updatedAt = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
         cage.createdAt = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
