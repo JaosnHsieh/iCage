@@ -1,230 +1,292 @@
 <div ng-controller="cageCtrl">
-<span us-spinner="{radius:30, width:8, length: 16}"></span>
-<h1 class="page-header">籠子管理</h1>
+    <span us-spinner="{radius:30, width:8, length: 16}"></span>
+
+    <div class="bs-callout bs-callout-primary card">
+
+        <h1>籠子管理</h1>
+
+    </div>
+
+    <div class="card">
+
         <ul class="nav nav-tabs">
-          <li class="active">
-            <a  href="#1" data-toggle="tab" id="list">籠子列表</a>
-          </li>
-          <li><a href="#2" data-toggle="tab" id="add">新增籠子資料</a>
-          </li>
-          <li><a href="#3" data-toggle="tab" id="edit" ng-show="editCage!=null">編輯籠子資料</a>
-          </li>
+            <li class="active">
+                <a href="#1" data-toggle="tab" id="list">籠子列表</a>
+            </li>
+            <li><a href="#2" data-toggle="tab" id="add">新增籠子資料</a>
+            </li>
+            <li><a href="#3" data-toggle="tab" id="edit" ng-show="editCage!=null">編輯籠子資料</a>
+            </li>
         </ul>
+        
+    </div>
 
-        <div class="tab-content ">
+    <div class="tab-content card">
 
-          <div class="tab-pane active" id="1">
+        <div class="tab-pane active" id="1">
 
 
-                <div class="panel panel-primary">
+            <div class="table-responsive">
 
-                  <div class="panel-heading"></div>
-                  <div class="panel-body">
+                <table class="table table-bordered table-striped">
 
-                    <table class="table table-bordered table-striped">
-
-                      <thead>
+                    <thead>
                         <td style="width:9em;">編輯/刪除</td>
                         <td>籠號</td>
-                        <td>名稱</td>
                         <td>狀態</td>
-                        <td>感應器</td>
+                        <td>攝影機</td>
                         <td>備註</td>
-                      </thead>
+                    </thead>
 
-                      <tbody>
-                        <tr dir-paginate="c in cages | itemsPerPage: pageSize" pagination-id="cages">
-                           <td>
-                            <a class="btn btn-info" ng-click="updateCage(c)">編輯</a>
-                            <div class="pull-right dropdown">
-                                <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">刪除
+                    <tbody>
+
+                        <tr dir-paginate="c in cages | filter:keyword| orderBy:sortType:sortReverse|itemsPerPage: pageSize " pagination-id="cages">
+                            <td>
+                                <a class="btn btn-info" ng-click="updateCage(c)">編輯</a>
+                                <div class="pull-right dropdown">
+                                    <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">刪除
                                 </button>
-                                <ul class="dropdown-menu">
-                                  <li class="btn btn-danger btn-block" ng-click="deleteCage(c)">是</li>
-                                  <li class="btn btn-primary  btn-block">否</li>
-                                </ul>
-                            </div>
-                          </td>
-                          <td>{[{c.idNo}]}</td>
-                          <td>{[{c.name}]}</td>
-                          <td>{[{c.status}]}</td>
-                          <td>{[{c.ip}]}
-                            <button ng-click="openCam(c)" class="btn btn-primary">觀看</button>
-                            <button class="btn btn-info" ng-click="turnOnCam(c)">開啟</button>
-                            <button class="btn btn-waring" ng-click="turnOffCam(c)">關閉</button>
-                          </td>
-                          <td>{[{c.memo}]}</td>
+                                    <ul class="dropdown-menu">
+                                        <li class="btn btn-danger btn-block" ng-click="deleteCage(c)">是</li>
+                                        <li class="btn btn-primary  btn-block">否</li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td>{[{c.idNo}]}</td>
+                            <td>{[{c.status}]}</td>
+                            <td>{[{c.ip}]}
+                                <button ng-click="openCam(c)" class="btn btn-primary">觀看</button>
+                                <button class="btn btn-info" ng-click="turnOnCam(c)">開啟</button>
+                                <button class="btn btn-waring" ng-click="turnOffCam(c)">關閉</button>
+                            </td>
+                            <td>{[{c.memo}]}</td>
                         </tr>
-                      </tbody>
-                    
-                    </table>
-                    
-                    <!-- angular 分頁 start -->
-                        <div class="form-group row">
-                            <div class="col-sm-2">
-                                每頁顯示數量:
-                                <select ng-init="pageSize='5'" ng-model="pageSize" id="pageSize" class="form-control">
+
+                    </tbody>
+
+                </table>
+            </div>
+            <!-- angular 分頁 start -->
+            <div class="form-group row">
+                <div class="col-sm-2">
+                    每頁顯示數量:
+                    <select ng-init="pageSize='5'" ng-model="pageSize" id="pageSize" class="form-control">
                                     <option value="5">5</option>
                                     <option value="10">10</option>
-                                    <option value="15">15</option>
-                                    <option value="20">20</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
                                 </select>
-                                        
-                            </div>
-                            <div class="col-sm-3">
-                                <dir-pagination-controls pagination-id="cages"></dir-pagination-controls> 
-                            </div>
-                            
-                        </div>
-                        <!-- angular 分頁 end -->
-
-                  </div>
 
                 </div>
 
-                 
-          </div>
-
-          <div class="tab-pane" id="2">
-            
-              <div class="panel panel-primary">
-
-                <div class="panel-heading"></div>
-                <div class="panel-body">
-
-                  <form name="cageForm" ng-submit="addCage()" novalidate>
-
-                   
-
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <label for="">名稱<strong class="text-danger">*(必填)</strong></label>
-                       
-                        
-                            <input class="form-control" type="text" ng-model="cage.name">
-                        </div>
-                        
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <label for="">狀態<strong class="text-danger">*(必填)</strong></label>
-                       
-                        
-                            <input class="form-control" type="text" ng-model="cage.status">
-                        </div>
-                        
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <label for="">感應器ip<strong class="text-danger">*(必填)</strong></label>
-                       
-                        
-                            <input class="form-control" type="text" ng-model="cage.ip">
-                        </div>
-                        
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <label for="">備註<strong class="text-danger">*(必填)</strong></label>
-                       
-                        
-                            <input class="form-control" type="text" ng-model="cage.memo">
-                        </div>
-                        
-                    </div>
-                    
-                      <div class="form-group row">
-                        <input class="form-control  btn-primary" type="submit">
-                      </div>
-
-                  </form>
-
+                <div class="col-sm-3">
+                    搜尋:
+                    <input placeholder="輸入關鍵字" class="form-control" type="text" ng-model="keyword">
                 </div>
 
-              </div>
-               
-
-
-          </div>
-
-
-          <div class="tab-pane" id="3">
-            
-              <div class="panel panel-primary">
-
-                <div class="panel-heading"></div>
-                <div class="panel-body">
-
-                  <form name="cageForm" ng-submit="submitUpdatecage()" novalidate>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <label for="">編號<strong class="text-danger">*(必填)</strong></label>
-                       
-                        
-                            <input class="form-control" type="text" ng-model="editCage.idNo" ng-disabled="true">
-                        </div>
-                        
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <label for="">名稱<strong class="text-danger">*(必填)</strong></label>
-                       
-                        
-                            <input class="form-control" type="text" ng-model="editCage.name">
-                        </div>
-                        
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <label for="">狀態<strong class="text-danger">*(必填)</strong></label>
-                       
-                        
-                            <input class="form-control" type="text" ng-model="editCage.status">
-                        </div>
-                        
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <label for="">感應器IP<strong class="text-danger">*(必填)</strong></label>
-                       
-                        
-                            <input class="form-control" type="text" ng-model="editCage.ip">
-                        </div>
-                        
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <label for="">備註<strong class="text-danger">*(必填)</strong></label>
-                       
-                        
-                            <input class="form-control" type="text" ng-model="editCage.memo">
-                        </div>
-                        
-                    </div>
-                    
-                      <div class="form-group row">
-                        <input class="form-control  btn-primary" type="submit">
-                      </div>
-
-                  </form>
-
+                <div class="col-sm-6">
+                    <dir-pagination-controls pagination-id="cages"></dir-pagination-controls>
                 </div>
 
-              </div>
-               
+            </div>
+            <!-- angular 分頁 end -->
 
 
-          </div>
 
 
         </div>
+
+        <div class="tab-pane" id="2">
+
+
+
+            <form name="cageForm" ng-submit="addCage()" novalidate>
+
+
+
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label for="">No<strong class="text-danger">*(必填)</strong></label>
+
+
+                        <input class="form-control" type="text" ng-model="cage.no">
+                    </div>
+
+                </div>
+
+                 <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label for="">CustomerId<strong class="text-danger">*(必填)</strong></label>
+
+
+                        <input class="form-control" type="text" ng-model="cage.customerId">
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label for="">qrCodeId<strong class="text-danger">*(必填)</strong></label>
+
+
+                        <input class="form-control" type="text" ng-model="cage.qrCodeId">
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label for="">位置<strong class="text-danger">*(必填)</strong></label>
+
+
+                        <input class="form-control" type="text" ng-model="cage.position">
+                    </div>
+
+                </div>
+
+
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label for="">狀態<strong class="text-danger">*(必填)</strong></label>
+
+
+                        <input class="form-control" type="text" ng-model="cage.status">
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label for="">感應器ip<strong class="text-danger">*(必填)</strong></label>
+
+
+                        <input class="form-control" type="text" ng-model="cage.ip">
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label for="">備註<strong class="text-danger">*(必填)</strong></label>
+
+
+                        <input class="form-control" type="text" ng-model="cage.memo">
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <input class="form-control  btn-primary" type="submit">
+                </div>
+
+            </form>
+
+
+
+
+
+        </div>
+
+
+        <div class="tab-pane" id="3">
+
+
+
+            <form name="cageForm" ng-submit="submitUpdatecage()" novalidate>
+
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label for="">編號<strong class="text-danger">*(必填)</strong></label>
+
+
+                        <input class="form-control" type="text" ng-model="editCage.idNo" ng-disabled="true">
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label for="">No<strong class="text-danger">*(必填)</strong></label>
+
+
+                        <input class="form-control" type="text" ng-model="editCage.no">
+                    </div>
+
+                </div>
+
+                 <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label for="">CustomerId<strong class="text-danger">*(必填)</strong></label>
+
+
+                        <input class="form-control" type="text" ng-model="editCage.customerId">
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label for="">qrCodeId<strong class="text-danger">*(必填)</strong></label>
+
+
+                        <input class="form-control" type="text" ng-model="editCage.qrCodeId">
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label for="">位置<strong class="text-danger">*(必填)</strong></label>
+
+
+                        <input class="form-control" type="text" ng-model="editCage.position">
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label for="">狀態<strong class="text-danger">*(必填)</strong></label>
+
+
+                        <input class="form-control" type="text" ng-model="editCage.status">
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label for="">感應器IP<strong class="text-danger">*(必填)</strong></label>
+
+
+                        <input class="form-control" type="text" ng-model="editCage.ip">
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label for="">備註<strong class="text-danger">*(必填)</strong></label>
+
+
+                        <input class="form-control" type="text" ng-model="editCage.memo">
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <input class="form-control  btn-primary" type="submit">
+                </div>
+
+            </form>
+
+
+
+
+
+        </div>
+
+
+    </div>
 
 </div>

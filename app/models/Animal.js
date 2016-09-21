@@ -24,14 +24,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    strainName: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    strainCategory: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
     cageId: {
       type: DataTypes.INTEGER,
       allowNull: true
@@ -49,10 +41,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     weight: {
-      type: DataTypes.FLOAT,
-      allowNull: true
-    },
-    age: {
       type: DataTypes.FLOAT,
       allowNull: true
     },

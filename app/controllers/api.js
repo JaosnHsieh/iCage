@@ -29,13 +29,10 @@ router.post('/animals',(req,res)=>{
     let animal = db.Animal.build();
 
       c(req.body);
-
         animal.customerId = data.customerId;
         animal.animalNo = data.animalNo;
         animal.status = data.status;
         animal.strainId = data.strainId;
-        animal.strainNam = data.strainNam;
-        animal.strainCategory = data.strainCategory;
         animal.cageId = data.cageId;
         animal.cageNo = data.cageNo; 
         animal.sex = data.sex;
@@ -110,7 +107,10 @@ router.post('/cages',(req,res)=>{
     let data = req.body;
     let cage = db.Cage.build();
 
-        cage.name = data.name;
+        cage.no = data.no;
+        cage.customerId = data.customerId;
+        cage.qrCodeId = data.qrCodeId;
+        cage.position = data.position;
         cage.status = data.status;
         cage.ip = data.ip;
         cage.memo = data.memo;
@@ -182,6 +182,7 @@ router.post('/strains',(req,res)=>{
 
         strain.name = data.name;
         strain.memo = data.memo;
+        strain.category = data.category;
         strain.updatedAt = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
         strain.createdAt = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
         

@@ -1,42 +1,31 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Cage', {
+  return sequelize.define('Customer', {
     idNo: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    status: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    ip: {
+    name: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    no: {
+    phone: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    customerId: {
+    email: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    position: {
+    address: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    qrCodeId: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    memo: {
-      type: DataTypes.STRING,
-      allowNull: true
-    }
+    
   }, {
-    tableName: 'Cage'
+    tableName: 'Customer'
   });
 };

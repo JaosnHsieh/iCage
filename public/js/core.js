@@ -15,7 +15,7 @@ app.config(function($interpolateProvider,paginationTemplateProvider) {
 
 //// Animal Controller Start
 app.controller('animalCtrl', function($scope, $filter, $q, $http) {
-    
+    $scope.sortReverse = false;
     $scope.pageSize = 5;
 
     $scope.autofill = function(){
@@ -24,7 +24,12 @@ app.controller('animalCtrl', function($scope, $filter, $q, $http) {
 
 
     $http.get('/api/animals').success(function(data){
+        // for(var i = 0 ; i < 5000 ; i++){
+        //     var temp = angular.copy(data[0]);
+        //     data.push(temp);
+        // }
       $scope.animals = data;
+        
     });
 
     $scope.addAnimal = function(){
@@ -95,12 +100,20 @@ app.controller('animalCtrl', function($scope, $filter, $q, $http) {
 });
 //// Animal Controller End
 
+
+
 //// Cage Controller Start
 app.controller('cageCtrl', function($scope, $filter, $q, $http) {
     
     
 
     $http.get('/api/cages').success(function(data){
+        
+        // for(var i = 0 ; i < 5000 ; i++){
+        //             var temp = angular.copy(data[0]);
+        //             data.push(temp);
+        //         }
+
       $scope.cages = data;
     });
 

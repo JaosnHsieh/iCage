@@ -12,6 +12,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     },
+    category: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     memo: {
       type: DataTypes.STRING,
       allowNull: true
