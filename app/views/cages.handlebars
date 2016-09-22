@@ -31,7 +31,7 @@
                 <table class="table table-bordered table-striped">
 
                     <thead>
-                        <td style="width:9em;">編輯/刪除</td>
+                        <td style="width:6em;">編輯</td>
                         <td>籠號</td>
                         <td>狀態</td>
                         <td>攝影機</td>
@@ -43,14 +43,7 @@
                         <tr dir-paginate="c in cages | filter:keyword| orderBy:sortType:sortReverse|itemsPerPage: pageSize " pagination-id="cages">
                             <td>
                                 <a class="btn btn-info" ng-click="updateCage(c)">編輯</a>
-                                <div class="pull-right dropdown">
-                                    <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">刪除
-                                </button>
-                                    <ul class="dropdown-menu">
-                                        <li class="btn btn-danger btn-block" ng-click="deleteCage(c)">是</li>
-                                        <li class="btn btn-primary  btn-block">否</li>
-                                    </ul>
-                                </div>
+                               
                             </td>
                             <td>{[{c.idNo}]}</td>
                             <td>{[{c.status}]}</td>
@@ -190,7 +183,14 @@
 
         <div class="tab-pane" id="3">
 
-
+             <div class="pull-right dropdown">
+                <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">刪除
+            </button>
+                <ul class="dropdown-menu">
+                    <li class="btn btn-danger btn-block" ng-click="deleteCage(editCage)">是</li>
+                    <li class="btn btn-primary  btn-block">否</li>
+                </ul>
+            </div>
 
             <form name="cageForm" ng-submit="submitUpdatecage()" novalidate>
 

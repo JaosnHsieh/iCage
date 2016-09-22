@@ -1,4 +1,8 @@
-var app = angular.module('app', ['ngLoadingSpinner','angularUtils.directives.dirPagination']);
+var app = angular.module('app', ['ngLoadingSpinner','angularUtils.directives.dirPagination'])
+        .factory('myFactory', function () {
+            var factory = { };
+            return factory;
+        });
 app.config(['$locationProvider', function($locationProvider){
     $locationProvider.html5Mode(true);    
 }]);
@@ -15,6 +19,7 @@ app.config(function($interpolateProvider,paginationTemplateProvider) {
 
 //// Animal Controller Start
 app.controller('animalCtrl', function($scope, $filter, $q, $http) {
+
     $scope.sortReverse = false;
     $scope.pageSize = 5;
 
@@ -90,6 +95,8 @@ app.controller('animalCtrl', function($scope, $filter, $q, $http) {
                              
                              $http.get('/api/animals').success(function(data){
                                  $scope.animals = data;
+                                 $scope.editAnimal = null;
+                                 $('#list').tab('show');
                               });
 
                 });
@@ -175,6 +182,8 @@ app.controller('cageCtrl', function($scope, $filter, $q, $http) {
                              
                              $http.get('/api/cages').success(function(data){
                                  $scope.cages = data;
+                                 $scope.editCage = null;
+                                 $('#list').tab('show');
                               });
 
                 });
@@ -262,6 +271,8 @@ app.controller('strainCtrl', function($scope, $filter, $q, $http) {
                              
                              $http.get('/api/strains').success(function(data){
                                  $scope.strains = data;
+                                 $scope.editStrain = null;
+                                 $('#list').tab('show');
                               });
 
                 });
@@ -342,6 +353,9 @@ app.controller('eventCtrl', function($scope, $filter, $q, $http) {
                              
                              $http.get('/api/events').success(function(data){
                                  $scope.events = data;
+                                  $scope.editEvent = null;
+                                 $('#list').tab('show');
+                                 
                               });
 
                 });

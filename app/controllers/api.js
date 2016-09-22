@@ -12,7 +12,10 @@ module.exports = function (app) {
 //// Aniaml table start
 
 router.get('/animals',(req,res)=>{
-    db.Animal.findAll()
+    let queryCrit = req.query.cageNo?{cageNo:req.query.cageNo}:{};
+    let options = { where : queryCrit};
+
+    db.Animal.findAll(options)
       .then((data)=>{
         res.send(data);
       })
