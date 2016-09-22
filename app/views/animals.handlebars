@@ -53,18 +53,18 @@
 
                     <tbody>
                         <tr dir-paginate="a in animals | filter:keyword| orderBy:sortType:sortReverse|itemsPerPage: pageSize " pagination-id="animals">
-
-                            <td>
-                                <a class="btn btn-info" ng-click="updateAnimal(a)">編輯</a>
-                                
-                            </td>
-                            <td>{[{a.cageNo}]}</td>
-                            <td>{[{a.animalNo}]}</td>
-                            <td>{[{a.sex}]}</td>
-                            <td>{[{a.birth}]}</td>
-                            <td>{[{a.iacuc}]}</td>
-                            <td>{[{a.memo}]}</td>
+                                <td>
+                                    <a class="btn btn-info" ng-click="updateAnimal(a)">編輯</a>
+                                    
+                                </td>
+                                <td>{[{a.cageNo}]}</td>
+                                <td>{[{a.animalNo}]}</td>
+                                <td>{[{a.sex}]}</td>
+                                <td>{[{a.birth}]}</td>
+                                <td>{[{a.iacuc}]}</td>
+                                <td>{[{a.memo}]}</td>
                         </tr>
+                        
                     </tbody>
 
                 </table>

@@ -1,8 +1,4 @@
-var app = angular.module('app', ['ngLoadingSpinner','angularUtils.directives.dirPagination'])
-        .factory('myFactory', function () {
-            var factory = { };
-            return factory;
-        });
+var app = angular.module('app', ['ngLoadingSpinner','angularUtils.directives.dirPagination']);
 app.config(['$locationProvider', function($locationProvider){
     $locationProvider.html5Mode(true);    
 }]);
@@ -148,6 +144,8 @@ app.controller('cageCtrl', function($scope, $filter, $q, $http) {
     $scope.updateCage = function(c){
           $scope.editCage = c;
           $('#edit').tab('show');
+         
+          $scope.$broadcast('updateCage', c);
     };
 
     $scope.submitUpdatecage = function(){
@@ -199,10 +197,112 @@ app.controller('cageCtrl', function($scope, $filter, $q, $http) {
         $http.get('http://'+c.ip+':8090'+'/off');
 
     };
-
+     
 });
 //// Cage Controller End
 
+//// AnimalInCage Controller Start
+app.controller('animalInCageCtrl', function($scope, $filter, $q, $http) {
+    
+     $scope.$on('updateCage',function(event,cage){
+         $scope.cage = cage;
+         $http.get('/api/animals?cageNo='+cage.no).success(function(data){
+        // for(var i = 0 ; i < 5000 ; i++){
+        //     var temp = angular.copy(data[0]);
+        //     data.push(temp);
+        // }
+        $scope.animals = data;
+        
+        });
+     });
+
+    $scope.sortReverse = false;
+    $scope.pageSize = 5;
+
+    $scope.autofill = function(){
+          $scope.animal = {"customerId":"0101","animalNo":"1010","status":"10101","strainId":"010","strainNam":"10","strainCategory":"010","cageId":"10","cageNo":"010","sex":"10","weight":"010","memo":"010","resume":"10","iacuc":"010","birth":"01"};
+    };
+
+
+    
+
+    $scope.addAnimal = function(){
+
+        $scope.animal.cageNo = $scope.cage.no;
+
+        $http({ 
+                            method :  'POST' , 
+                            url :  '/api/animals' , 
+                            data :  $scope.animal, 
+                            headers :  { 'Content-Type' :  'application/json' } 
+                })
+                .success(function(animal){
+
+                    $http.get('/api/animals?cageNo='+$scope.cage.no).success(function(data){
+                                 
+                                 $scope.animals = data;
+                                 $scope.animal = null;
+                                 $("#cageAnimalList").tab('show');
+                    
+                    });
+                   
+
+                });
+        
+    };
+
+    $scope.updateAnimal = function(a){
+          $scope.editAnimal = a;
+          $('#cageAnimalEdit').tab('show');
+    };
+
+    $scope.submitUpdateAnimal = function(a){
+          
+          $http({ 
+                            method :  'PUT' , 
+                            url :  '/api/animals' , 
+                            data :  $scope.editAnimal, 
+                            headers :  { 'Content-Type' :  'application/json' } 
+                })
+                .success(function(animal){
+                    
+                             $scope.editAnimal = null;
+                             $http.get('/api/animals?cageNo='+$scope.cage.no).success(function(data){
+                                
+                                $scope.animals = data;
+                                $('#cageAnimalList').tab('show');
+                                
+                                
+                            });
+                });
+
+    };
+
+    $scope.deleteAnimal = function(a){
+
+        $http({ 
+                            method :  'DELETE' , 
+                            url :  '/api/animals' , 
+                            data :  a, 
+                            headers :  { 'Content-Type' :  'application/json' } 
+                })
+                .success(function(animal){
+                             $http.get('/api/animals?cageNo='+$scope.cage.no).success(function(data){
+                                
+                                $scope.animals = data;
+                                 $scope.editAnimal = null;
+                                 $('#cageAnimalList').tab('show');
+                                
+                            });
+                            
+
+                });
+    };
+
+   
+
+});
+//// AnimalInCage Controller End
 
 //// Strains Controller Start
 app.controller('strainCtrl', function($scope, $filter, $q, $http) {
