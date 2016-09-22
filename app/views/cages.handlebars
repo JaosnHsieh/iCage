@@ -1,4 +1,9 @@
 <div ng-controller="cageCtrl">
+    <div id="errors" class="alert alert-danger fade in" ng-repeat="e in errors" ng-show="showError">
+        <a class="close" ng-click="showError=false">&times;</a>
+        <center><h3>{[{e.msg}]}</h3></center>
+    </div>
+
     <span us-spinner="{radius:30, width:8, length: 16}"></span>
 
     <div class="bs-callout bs-callout-primary card">

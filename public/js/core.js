@@ -106,9 +106,9 @@ app.controller('animalCtrl', function($scope, $filter, $q, $http) {
 
 
 //// Cage Controller Start
-app.controller('cageCtrl', function($scope, $filter, $q, $http) {
+app.controller('cageCtrl', function($scope, $filter, $q, $http,$rootScope) {
     
-    
+   $scope.errors=  [];
 
     $http.get('/api/cages').success(function(data){
         
@@ -169,8 +169,14 @@ app.controller('cageCtrl', function($scope, $filter, $q, $http) {
     };
 
     $scope.deleteCage = function(a){
-
-        $http({ 
+        $scope.showError = false;
+        if($rootScope.getSharedAnimal().length>0){
+            $scope.errors.push({msg:'請先刪除或轉移籠子內的動物'});
+            $scope.showError=true;
+            console.log($scope.errors);
+        }
+        else{
+            $http({ 
                             method :  'DELETE' , 
                             url :  '/api/cages' , 
                             data :  a, 
@@ -185,6 +191,8 @@ app.controller('cageCtrl', function($scope, $filter, $q, $http) {
                               });
 
                 });
+        }
+        
     };
 
     $scope.openCam = function(c){
@@ -202,7 +210,12 @@ app.controller('cageCtrl', function($scope, $filter, $q, $http) {
 //// Cage Controller End
 
 //// AnimalInCage Controller Start
-app.controller('animalInCageCtrl', function($scope, $filter, $q, $http) {
+app.controller('animalInCageCtrl', function($scope, $filter, $q, $http,$rootScope) {
+
+    $rootScope.getSharedAnimal = function(){
+        return $scope.animals;
+    }
+     
     
      $scope.$on('updateCage',function(event,cage){
          $scope.cage = cage;
@@ -213,6 +226,7 @@ app.controller('animalInCageCtrl', function($scope, $filter, $q, $http) {
         // }
         $scope.animals = data;
         
+       
         });
      });
 
@@ -279,6 +293,8 @@ app.controller('animalInCageCtrl', function($scope, $filter, $q, $http) {
     };
 
     $scope.deleteAnimal = function(a){
+
+       
 
         $http({ 
                             method :  'DELETE' , 
