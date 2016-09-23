@@ -15,7 +15,7 @@ app.config(function($interpolateProvider,paginationTemplateProvider,$stateProvid
   
   var indexState = {
     name: 'index',
-    url: '/index',
+    url: '/',
     templateUrl: 'partials/index.html'
   } 
   
@@ -258,7 +258,41 @@ app.controller('cageCtrl', function($scope, $filter, $q, $http,$rootScope) {
 //// AnimalInCage Controller Start
 app.controller('animalInCageCtrl', function($scope, $filter, $q, $http,$rootScope) {
 
-   
+     Array.prototype.getIndexBy = function (name, value) {  //// 這個function可以全部js用一次就好
+  for (var i = 0; i < this.length; i++) {
+  if (this[i][name] == value) {
+  return i;
+  }
+  }
+  return -1;
+}
+
+  $scope.sourceIndex = function (keyName, key) {
+
+  var ix = $scope.animals.getIndexBy(keyName, key);
+  return ix;
+
+  }
+
+//// 再把animals換成自己要選擇的object array的
+
+  $scope.checkAll = function () {
+  //only visible rows
+  var boxes = document.getElementsByClassName("rowSelector");
+  for (var bix=0; bix<boxes.length;bix++) {
+  var ix = boxes[bix].value;
+  $scope.animals[ix].isSelected = $scope.masterCheck;
+  }
+  }
+
+  $scope.onPageChange = function(newPageNumber){
+
+  $scope.masterCheck = false;
+  for (var i in $scope.animals) {
+  $scope.animals[i].isSelected = false;
+  }
+
+  };
 
     $rootScope.getSharedAnimal = function(){
         return $scope.animals;

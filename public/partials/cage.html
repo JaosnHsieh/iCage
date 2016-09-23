@@ -192,7 +192,7 @@
         <div class="tab-pane" id="3">
 
             <div id="cageForm">
-                <div class="pull-right dropdown">
+                <div class="dropdown pull-right">
                     <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">刪除
                             </button>
                     <ul class="dropdown-menu">
@@ -316,6 +316,9 @@
                             <table class="table table-bordered table-striped">
 
                                 <thead>
+                                    <td>全選
+                                     <input type="checkbox" ng-click="checkAll()" ng-model="masterCheck">
+                                    </td>
                                     <td style="width:6em;">編輯</td>
                                     <td>
                                         <a ng-click="sortType = 'cageNo'; sortReverse = !sortReverse">
@@ -342,6 +345,9 @@
                                 <tbody>
                                     <tr dir-paginate="a in animals | filter:keyword| orderBy:sortType:sortReverse|itemsPerPage: pageSize " pagination-id="animals">
 
+                                        <td>
+                                         <input class="rowSelector" value="{[{sourceIndex('idNo',a.idNo)}]}" type="checkbox" ng-model="a.isSelected">
+                                        </td>
                                         <td>
                                             <a class="btn btn-info" ng-click="updateAnimal(a)">編輯</a>
 
