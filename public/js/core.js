@@ -1,20 +1,64 @@
-var app = angular.module('app', ['ngLoadingSpinner','angularUtils.directives.dirPagination']);
-app.config(['$locationProvider', function($locationProvider){
+var app = angular.module('app', ['ngLoadingSpinner','angularUtils.directives.dirPagination','ui.router']);
+app.config(['$locationProvider','$anchorScrollProvider', function($locationProvider,$anchorScrollProvider){
     $locationProvider.html5Mode(true);    
+    $anchorScrollProvider.disableAutoScrolling();
 }]);
+
+
 
 // app.controler('mainController',function mainController($scope, $http) {   
 // });
-app.config(function($interpolateProvider,paginationTemplateProvider) {
+app.config(function($interpolateProvider,paginationTemplateProvider,$stateProvider) {
   $interpolateProvider.startSymbol('{[{');
   $interpolateProvider.endSymbol('}]}');
   paginationTemplateProvider.setPath('/js/dirPagination.tpl.html');
+  
+  var indexState = {
+    name: 'index',
+    url: '/index',
+    templateUrl: 'partials/index.html'
+  } 
+  
+  var animalState = {
+    name: 'animal',
+    url: '/animal',
+    templateUrl: 'partials/animal.html'
+  } 
+  var cageState = {
+    name: 'cage',
+    url: '/cage',
+    templateUrl: 'partials/cage.html'
+  }
+  var strainState = {
+    name: 'strain',
+    url: '/strain',
+    templateUrl: 'partials/strain.html'
+  }
+  var eventState = {
+    name: 'event',
+    url: '/event',
+    templateUrl: 'partials/event.html'
+  }
+
+  $stateProvider.state(indexState);
+  $stateProvider.state(animalState);
+  $stateProvider.state(cageState);
+  $stateProvider.state(strainState);
+  $stateProvider.state(eventState);
+
 
 });
 
 
 //// Animal Controller Start
 app.controller('animalCtrl', function($scope, $filter, $q, $http) {
+
+
+
+      $scope.showData = function(d){
+        console.log(d);
+    }
+
 
     $scope.sortReverse = false;
     $scope.pageSize = 5;
@@ -108,6 +152,8 @@ app.controller('animalCtrl', function($scope, $filter, $q, $http) {
 //// Cage Controller Start
 app.controller('cageCtrl', function($scope, $filter, $q, $http,$rootScope) {
     
+   
+
    $scope.errors=  [];
 
     $http.get('/api/cages').success(function(data){
@@ -196,7 +242,7 @@ app.controller('cageCtrl', function($scope, $filter, $q, $http,$rootScope) {
     };
 
     $scope.openCam = function(c){
-        window.open('http://'+c.ip+':8090?name='+c.name, "", "width=680,height=520");
+        window.open('http://'+c.ip+':8090?no='+c.no, "", "width=680,height=520");
     };
     $scope.turnOnCam = function(c){
         $http.get('http://'+c.ip+':8090'+'/on');
@@ -211,6 +257,8 @@ app.controller('cageCtrl', function($scope, $filter, $q, $http,$rootScope) {
 
 //// AnimalInCage Controller Start
 app.controller('animalInCageCtrl', function($scope, $filter, $q, $http,$rootScope) {
+
+   
 
     $rootScope.getSharedAnimal = function(){
         return $scope.animals;

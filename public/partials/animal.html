@@ -12,17 +12,17 @@
 
     <ul class="nav nav-tabs card">
         <li class="active">
-            <a href="#1" data-toggle="tab" id="list">動物列表</a>
+            <a href="#animalList" data-toggle="tab" id="list">動物列表</a>
         </li>
-        <li><a href="#2" data-toggle="tab" id="add">新增動物資料</a>
+        <li><a href="#animalAdd" data-toggle="tab" id="add">新增動物資料</a>
         </li>
-        <li><a href="#3" data-toggle="tab" id="edit" ng-show="editAnimal!=null">編輯動物資料</a>
+        <li><a href="#animalEdit" data-toggle="tab" id="edit" ng-show="editAnimal!=null">編輯動物資料</a>
         </li>
     </ul>
 
     <div class="tab-content card">
 
-        <div class="tab-pane active" id="1">
+        <div class="tab-pane active" id="animalList">
 
             <div class="table-responsive">
                 <table class="table table-bordered table-striped">
@@ -100,7 +100,7 @@
 
         </div>
 
-        <div class="tab-pane" id="2">
+        <div class="tab-pane" id="animalAdd">
 
 
             <form name="animalForm" ng-submit="addAnimal()" novalidate>
@@ -237,7 +237,7 @@
 
 
         </div>
-        <div class="tab-pane" id="3">
+        <div class="tab-pane" id="animalEdit">
 
                 <div class="pull-right dropdown">
 

@@ -32,13 +32,22 @@ module.exports = function(app, config) {
   }));
   app.use(cookieParser());
   app.use(compress());
-  app.use(express.static(config.root + '/public'));
   app.use(methodOverride());
+
+app.use('/', express.static(config.root + '/public'));
+
 
   var controllers = glob.sync(config.root + '/app/controllers/*.js');
   controllers.forEach(function (controller) {
     require(controller)(app);
   });
+
+
+app.all('/*', function(req, res, next) {
+    // Just send the index.html for other files to support HTML5Mode
+    res.sendFile('index.html', { root: config.root + '/public' });
+});  
+
 
   app.use(function (req, res, next) {
     var err = new Error('Not Found');
