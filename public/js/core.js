@@ -128,7 +128,7 @@ app.controller('animalCtrl', function($scope, $filter, $q, $http) {
                              $http.get('/api/animals').success(function(data){
                                  $scope.animals = data;
                                  $scope.editAnimal = null;
-                                 $('#list').tab('show');
+                                 $('#animalEdit').modal('hide');
                               });
 
                 });
@@ -141,10 +141,17 @@ app.controller('animalCtrl', function($scope, $filter, $q, $http) {
 
 
 
+
+
+
+
 //// Cage Controller Start
 app.controller('cageCtrl', function($scope, $filter, $q, $http,$rootScope) {
     
-   
+   $rootScope.ui = {
+       animalInCage : false,
+       cage:true
+   };
 
    $scope.errors=  [];
 
@@ -171,7 +178,7 @@ app.controller('cageCtrl', function($scope, $filter, $q, $http,$rootScope) {
                    $http.get('/api/cages').success(function(data){
                                  $scope.cages = data;
                                  $scope.cage = null;
-                                 $("#list").tab('show');
+                                 $("#cageAdd").modal('hide');
 
                               });
 
@@ -180,11 +187,15 @@ app.controller('cageCtrl', function($scope, $filter, $q, $http,$rootScope) {
     };
 
     $scope.updateCage = function(c){
+          $scope.$broadcast('loadAniamlInCage', c);
           $scope.editCage = c;
-          $('#edit').tab('show');
-         
-          $scope.$broadcast('updateCage', c);
+          $('#cageEdit').modal('show');
     };
+
+    $scope.toggleAnimalInCage = function(c){
+         $scope.$broadcast('updateCage', c);
+
+    }
 
     $scope.submitUpdatecage = function(){
           
@@ -198,7 +209,7 @@ app.controller('cageCtrl', function($scope, $filter, $q, $http,$rootScope) {
                              $scope.editCage = null;
                              $http.get('/api/cages').success(function(data){
                                  $scope.cages = data;
-                                 $('#list').tab('show');
+                                 $('#cageEdit').modal('hide');
 
                               });
 
@@ -207,7 +218,9 @@ app.controller('cageCtrl', function($scope, $filter, $q, $http,$rootScope) {
     };
 
     $scope.deleteCage = function(a){
+        
         $scope.showError = false;
+
         if($rootScope.getSharedAnimal().length>0){
             $scope.errors.push({msg:'請先刪除或轉移籠子內的動物'});
             $scope.showError=true;
@@ -225,7 +238,7 @@ app.controller('cageCtrl', function($scope, $filter, $q, $http,$rootScope) {
                              $http.get('/api/cages').success(function(data){
                                  $scope.cages = data;
                                  $scope.editCage = null;
-                                 $('#list').tab('show');
+                                 $('#cageEdit').modal('hide');
                               });
 
                 });
@@ -292,12 +305,26 @@ app.controller('animalInCageCtrl', function($scope, $filter, $q, $http,$rootScop
      
     
      $scope.$on('updateCage',function(event,cage){
+
+         $rootScope.ui.animalInCage =true;
+         $rootScope.ui.cage =false;
+
          $scope.cage = cage;
          $http.get('/api/animals?cageNo='+cage.no).success(function(data){
         // for(var i = 0 ; i < 5000 ; i++){
         //     var temp = angular.copy(data[0]);
         //     data.push(temp);
         // }
+        $scope.animals = data;
+        
+       
+        });
+     });
+
+      $scope.$on('loadAniamlInCage',function(event,cage){
+
+         $http.get('/api/animals?cageNo='+cage.no).success(function(data){
+       
         $scope.animals = data;
         
        
@@ -327,7 +354,7 @@ app.controller('animalInCageCtrl', function($scope, $filter, $q, $http,$rootScop
                                  
                                  $scope.animals = data;
                                  $scope.animal = null;
-                                 $("#cageAnimalList").tab('show');
+                                 $("#animalInCageAdd").modal('hide');
                     
                     });
                    
@@ -337,8 +364,9 @@ app.controller('animalInCageCtrl', function($scope, $filter, $q, $http,$rootScop
     };
 
     $scope.updateAnimal = function(a){
+          
           $scope.editAnimal = a;
-          $('#cageAnimalEdit').tab('show');
+          $('#cageAnimalEdit').modal('show');
     };
 
     $scope.submitUpdateAnimal = function(a){
@@ -355,7 +383,7 @@ app.controller('animalInCageCtrl', function($scope, $filter, $q, $http,$rootScop
                              $http.get('/api/animals?cageNo='+$scope.cage.no).success(function(data){
                                 
                                 $scope.animals = data;
-                                $('#cageAnimalList').tab('show');
+                                $('#cageAnimalEdit').modal('hide');
                                 
                                 
                             });
@@ -378,7 +406,7 @@ app.controller('animalInCageCtrl', function($scope, $filter, $q, $http,$rootScop
                                 
                                 $scope.animals = data;
                                  $scope.editAnimal = null;
-                                 $('#cageAnimalList').tab('show');
+                                 $('#cageAnimalEdit').modal('hide');
                                 
                             });
                             
