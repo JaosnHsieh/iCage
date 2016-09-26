@@ -34,6 +34,9 @@ body {
   display: none;
 }
 @media (min-width: 768px) {
+  #footer{
+    display:none;
+  }
   .sidebar {
     position: fixed;
     top: 51px;
@@ -231,4 +234,35 @@ body {
 .card .card-action a:hover {
   color: #ffd8a6;
   text-decoration: none;
+}
+
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+
+
+#footer{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+#footer .menu.active{
+  background-color:gray;
+}
+
+#bottomNav .menu {
+    font-size:1.5em;
+    color:#ddd;
+    text-decoration:none;
+}
+#bottomNav a:hover {
+    color:#fff;
 }
