@@ -1,4 +1,5 @@
 <div ng-controller="animalCtrl">
+
     <span us-spinner="{radius:30, width:8, length: 16}"></span>
 
     <div class="bs-callout bs-callout-primary card">
@@ -7,22 +8,15 @@
 
     </div>
 
-<button ng-click="autofill()">fill</button>
+
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#animalAdd">
+        新增動物
+    </button>
+
+   
 
 
-    <ul class="nav nav-tabs card">
-        <li class="active">
-            <a href="#animalList" data-toggle="tab" id="list">動物列表</a>
-        </li>
-        <li><a href="#animalAdd" data-toggle="tab" id="add">新增動物資料</a>
-        </li>
-        <li><a href="#animalEdit" data-toggle="tab" id="edit" ng-show="editAnimal!=null">編輯動物資料</a>
-        </li>
-    </ul>
-
-    <div class="tab-content card">
-
-        <div class="tab-pane active" id="animalList">
+        <div class="card" id="animalList">
 
             <div class="table-responsive">
                 <table class="table table-bordered table-striped">
@@ -100,8 +94,23 @@
 
         </div>
 
-        <div class="tab-pane" id="animalAdd">
+        
+        
 
+        
+
+<!--新增動物-->
+
+    <div class="modal fade" id="animalAdd">
+
+            <div class="modal-dialog" role="document">
+
+                <div class="modal-content">
+
+                     <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">新增動物</h4>
+                      </div>
 
             <form name="animalForm" ng-submit="addAnimal()" novalidate>
 
@@ -226,8 +235,12 @@
                 </div>
 
 
-                <div class="form-group row">
-                    <input class="form-control  btn-primary" type="submit">
+                 <div class="form-group row">
+                    <div class="col-sm-12">
+                         <div class="modal-footer">
+                            <input class="form-control btn-primary" type="submit">
+                         </div>
+                    </div>
                 </div>
 
             </form>
@@ -236,8 +249,25 @@
 
 
 
+            </div>
+            </div>
         </div>
-        <div class="tab-pane" id="animalEdit">
+
+<!--新增動物 end-->
+
+
+<!--編輯動物-->
+    <div class="modal fade" id="animalEdit">
+
+
+
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">編輯動物資料</h4>
+                </div>
 
                 <div class="pull-right dropdown">
 
@@ -374,7 +404,11 @@
 
 
                 <div class="form-group row">
-                    <input class="form-control btn-primary" type="submit">
+                    <div class="col-sm-12">
+                         <div class="modal-footer">
+                            <input class="form-control btn-primary" type="submit">
+                         </div>
+                    </div>
                 </div>
 
             </form>
@@ -383,7 +417,15 @@
 
 
 
+            </div>
+            </div>
         </div>
-    </div>
+
+
+<!--編輯動物 end-->
+
+
+
+
 
 </div>

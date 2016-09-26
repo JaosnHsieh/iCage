@@ -55,18 +55,10 @@ app.controller('animalCtrl', function($scope, $filter, $q, $http) {
 
 
 
-      $scope.showData = function(d){
-        console.log(d);
-    }
-
-
     $scope.sortReverse = false;
     $scope.pageSize = 5;
 
-    $scope.autofill = function(){
-          $scope.animal = {"customerId":"0101","animalNo":"1010","status":"10101","strainId":"010","strainNam":"10","strainCategory":"010","cageId":"10","cageNo":"010","sex":"10","weight":"010","memo":"010","resume":"10","iacuc":"010","birth":"01"};
-    };
-
+  
 
     $http.get('/api/animals').success(function(data){
         // for(var i = 0 ; i < 5000 ; i++){
@@ -90,7 +82,7 @@ app.controller('animalCtrl', function($scope, $filter, $q, $http) {
                    $http.get('/api/animals').success(function(data){
                                  $scope.animals = data;
                                  $scope.animal = null;
-                                 $("#list").tab('show');
+                                 $("#animalAdd").modal('hide');
 
                               });
 
@@ -100,7 +92,7 @@ app.controller('animalCtrl', function($scope, $filter, $q, $http) {
 
     $scope.updateAnimal = function(a){
           $scope.editAnimal = a;
-          $('#edit').tab('show');
+          $("#animalEdit").modal('show');
     };
 
     $scope.submitUpdateAnimal = function(a){
@@ -115,7 +107,7 @@ app.controller('animalCtrl', function($scope, $filter, $q, $http) {
                              $scope.editAnimal = null;
                              $http.get('/api/animals').success(function(data){
                                  $scope.animals = data;
-                                 $('#list').tab('show');
+                                 $("#animalEdit").modal('hide');
 
                               });
 
@@ -315,10 +307,7 @@ app.controller('animalInCageCtrl', function($scope, $filter, $q, $http,$rootScop
     $scope.sortReverse = false;
     $scope.pageSize = 5;
 
-    $scope.autofill = function(){
-          $scope.animal = {"customerId":"0101","animalNo":"1010","status":"10101","strainId":"010","strainNam":"10","strainCategory":"010","cageId":"10","cageNo":"010","sex":"10","weight":"010","memo":"010","resume":"10","iacuc":"010","birth":"01"};
-    };
-
+  
 
     
 
