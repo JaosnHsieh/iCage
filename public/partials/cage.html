@@ -21,19 +21,20 @@
                 <table class="table table-bordered table-striped">
 
                     <thead>
-                        <td style="width:6em;">修改</td>
-                        <td style="width:6em;">管理動物</td>
                         <td>籠號</td>
-                        <td>狀態</td>
-                        <td>攝影機</td>
-                        <td>備註</td>
+                        <td>位置</td>
+                        <td>籠內動物數量</td>
+                         <td style="width:6em;">修改</td>
+                        <td style="width:6em;">管理動物</td>
                     </thead>
 
                     <tbody>
 
                         <tr dir-paginate="c in cages | filter:keyword| orderBy:sortType:sortReverse|itemsPerPage: pageSize" pagination-id="cages">
-
-                            <td>
+                            <td>{[{c.no}]}</td>
+                            <td>{[{c.position}]}</td>
+                            <td>{[{getCount(c.no)}]}</td>
+                             <td>
                                 <a class="btn btn-info" ng-click="updateCage(c)">修改</a>
 
                             </td>
@@ -41,14 +42,6 @@
                                 <a class="btn btn-info" ng-click="toggleAnimalInCage(c)">管理</a>
 
                             </td>
-                            <td>{[{c.no}]}</td>
-                            <td>{[{c.status}]}</td>
-                            <td>{[{c.ip}]}
-                                <button ng-click="openCam(c)" class="btn btn-primary">觀看</button>
-                                <button class="btn btn-info" ng-click="turnOnCam(c)">開啟</button>
-                                <button class="btn btn-waring" ng-click="turnOffCam(c)">關閉</button>
-                            </td>
-                            <td>{[{c.memo}]}</td>
                         </tr>
 
                     </tbody>

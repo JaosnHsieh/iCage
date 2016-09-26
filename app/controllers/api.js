@@ -12,16 +12,23 @@ module.exports = function (app) {
 //// Aniaml table start
 
 router.get('/animals',(req,res)=>{
+  
     let queryCrit = req.query.cageNo?{cageNo:req.query.cageNo}:{};
     let options = { where : queryCrit};
-
-    db.Animal.findAll(options)
+    
+  
+        db.Animal.findAll(options)
       .then((data)=>{
         res.send(data);
       })
       .catch((err)=>{
         res.send(err);
       });
+    
+   
+  
+
+
 });
 
 router.post('/animals',(req,res)=>{
@@ -31,7 +38,6 @@ router.post('/animals',(req,res)=>{
     let data = req.body;
     let animal = db.Animal.build();
 
-      c(req.body);
         animal.customerId = data.customerId;
         animal.animalNo = data.animalNo;
         animal.status = data.status;

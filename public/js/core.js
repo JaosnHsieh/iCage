@@ -146,7 +146,19 @@ app.controller('animalCtrl', function($scope, $filter, $q, $http) {
 
 
 //// Cage Controller Start
-app.controller('cageCtrl', function($scope, $filter, $q, $http,$rootScope) {
+app.controller('cageCtrl', function($scope, $filter, $q, $http,$rootScope,filterFilter) {
+
+    $("#cageEdit").on('hide.bs.modal',function(){
+        $scope.errors = [];
+    });
+    
+    $http.get('/api/animals').success(function(data){
+        $rootScope.animalsForCounting = data;
+    });
+
+     $scope.getCount = function(cageNo){
+      return filterFilter( $rootScope.animalsForCounting, {cageNo:cageNo}).length;
+    }
     
    $rootScope.ui = {
        animalInCage : false,
@@ -224,7 +236,6 @@ app.controller('cageCtrl', function($scope, $filter, $q, $http,$rootScope) {
         if($rootScope.getSharedAnimal().length>0){
             $scope.errors.push({msg:'請先刪除或轉移籠子內的動物'});
             $scope.showError=true;
-            console.log($scope.errors);
         }
         else{
             $http({ 
@@ -355,6 +366,9 @@ app.controller('animalInCageCtrl', function($scope, $filter, $q, $http,$rootScop
                                  $scope.animals = data;
                                  $scope.animal = null;
                                  $("#animalInCageAdd").modal('hide');
+                                  $http.get('/api/animals').success(function(data){
+                                    $rootScope.animalsForCounting = data;
+                                });
                     
                     });
                    
@@ -407,6 +421,9 @@ app.controller('animalInCageCtrl', function($scope, $filter, $q, $http,$rootScop
                                 $scope.animals = data;
                                  $scope.editAnimal = null;
                                  $('#cageAnimalEdit').modal('hide');
+                                 $http.get('/api/animals').success(function(data){
+                                    $rootScope.animalsForCounting = data;
+                                });
                                 
                             });
                             
