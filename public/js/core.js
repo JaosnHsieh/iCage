@@ -157,6 +157,8 @@ app.controller('cageCtrl', function($scope, $filter, $q, $http,$rootScope,filter
     });
 
      $scope.getCount = function(cageNo){
+         
+         console.log(cageNo,$rootScope.animalsForCounting,filterFilter( $rootScope.animalsForCounting,{cageNo:cageNo}));
       return filterFilter( $rootScope.animalsForCounting, {cageNo:cageNo}).length;
     }
     
