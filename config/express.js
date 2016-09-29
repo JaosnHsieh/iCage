@@ -56,6 +56,11 @@ app.get('/login',function(req,res){
   res.sendFile('login.html', { root: config.root + '/public' });
 });
 
+app.get('/signup',function(req,res){
+  res.sendFile('signup.html', { root: config.root + '/public' });
+});
+
+
 app.post('/login',function(req,res){
    if(req.body.username=="admin"&&req.body.pwd==""){
      
@@ -73,7 +78,13 @@ app.get('/logout',function(req,res){
      res.redirect('/');
 });
 
-app.get('*',function isLoggedIn(req, res, next) {
+app.use('*',function isLoggedIn(req, res, next) {
+
+    // console.log('req.path',req.baseUrl,'req.method',req.method);
+    if(req.baseUrl =='/api/signup'&&req.method=='POST'||req.baseUrl =='/api/login'&&req.method=='POST'){
+      return next();
+    }
+
     // if user is authenticated in the session, carry on
     if (req.session.login)
         return next();
