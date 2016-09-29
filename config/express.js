@@ -1,6 +1,6 @@
 var express = require('express');
 var glob = require('glob');
-
+var session  = require('express-session');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var compress = require('compression');
 var methodOverride = require('method-override');
 var exphbs  = require('express-handlebars');
-
+var path = require('path');
 
 
 module.exports = function(app, config) { 
@@ -16,13 +16,13 @@ module.exports = function(app, config) {
   app.locals.ENV = env;
   app.locals.ENV_DEVELOPMENT = env == 'development';
   
-  app.engine('handlebars', exphbs({
-    layoutsDir: config.root + '/app/views/layouts/',
-    defaultLayout: 'main',
-    partialsDir: [config.root + '/app/views/partials/']
-  }));
-  app.set('views', config.root + '/app/views');
-  app.set('view engine', 'handlebars');
+  // app.engine('handlebars', exphbs({
+  //   layoutsDir: config.root + '/app/views/layouts/',
+  //   defaultLayout: 'main',
+  //   partialsDir: [config.root + '/app/views/partials/']
+  // }));
+  // app.set('views', config.root + '/app/views');
+  // app.set('view engine', 'handlebars');
 
   // app.use(favicon(config.root + '/public/img/favicon.ico'));
   app.use(logger('dev'));
@@ -33,6 +33,56 @@ module.exports = function(app, config) {
   app.use(cookieParser());
   app.use(compress());
   app.use(methodOverride());
+
+//// login logout signup start ===============================
+
+  app.use(session({
+
+      secret: '123456',
+
+      name: 'cookie-name',
+
+      // store: sessionStore, // connect-mongo session store
+
+      proxy: true,
+
+      resave: true,
+
+      saveUninitialized: true
+
+  }));
+
+app.get('/login',function(req,res){
+  res.sendFile('login.html', { root: config.root + '/public' });
+});
+
+app.post('/login',function(req,res){
+   if(req.body.username=="admin"&&req.body.pwd==""){
+     
+     req.session.login = true;
+     req.session.admin = true;
+     res.redirect('/');
+     
+   }
+});
+
+app.get('/logout',function(req,res){
+
+    req.session.login = false;
+     req.session.admin = false;
+     res.redirect('/');
+});
+
+app.get('*',function isLoggedIn(req, res, next) {
+    // if user is authenticated in the session, carry on
+    if (req.session.login)
+        return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/login');
+});
+
+//// login logout signup end ===============================
 
 app.use('/', express.static(config.root + '/public'));
 

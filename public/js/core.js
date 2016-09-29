@@ -40,11 +40,21 @@ app.config(function($interpolateProvider,paginationTemplateProvider,$stateProvid
     templateUrl: 'partials/event.html'
   }
 
+  var logoutState = {
+    name: 'logout',
+    url: '/logout',
+    controller: function($scope, $window) {
+         $window.location.reload();
+		}
+  }
+
+
   $stateProvider.state(indexState);
   $stateProvider.state(animalState);
   $stateProvider.state(cageState);
   $stateProvider.state(strainState);
   $stateProvider.state(eventState);
+  $stateProvider.state(logoutState);
 
 
 });
