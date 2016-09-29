@@ -157,6 +157,7 @@ app.controller('animalCtrl', function($scope, $filter, $q, $http) {
 
 //// Cage Controller Start
 app.controller('cageCtrl', function($scope, $filter, $q, $http,$rootScope,filterFilter) {
+    
 
     $("#cageEdit").on('hide.bs.modal',function(){
         $scope.errors = [];
@@ -168,8 +169,7 @@ app.controller('cageCtrl', function($scope, $filter, $q, $http,$rootScope,filter
 
      $scope.getCount = function(cageNo){
          
-         console.log(cageNo,$rootScope.animalsForCounting,filterFilter( $rootScope.animalsForCounting,{cageNo:cageNo}));
-      return filterFilter( $rootScope.animalsForCounting, {cageNo:cageNo}).length;
+      return filterFilter( $rootScope.animalsForCounting, {cageNo:cageNo},true).length;
     }
     
    $rootScope.ui = {

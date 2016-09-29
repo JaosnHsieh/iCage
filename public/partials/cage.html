@@ -1,4 +1,5 @@
 <div ng-controller="cageCtrl">
+
     <div ng-show="ui.cage">
 
         <span us-spinner="{radius:30, width:8, length: 16}"></span>
@@ -11,12 +12,22 @@
 
         <div class="card">
             <div class="card">
-                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#cageAdd">
+                <div class="row">
+
+                    <div class="col-sm-3">
+                        <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#cageAdd">
                     <!--<i class="fa fa-bolt fa-2x"></i>-->
                                 新增籠子
                   </button>
+                    </div>
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-3"></div>
+
+                </div>
+                
             </div>
-           
+
         </div>
 
         <!--list start-->
@@ -26,20 +37,19 @@
                 <table class="table table-bordered table-striped">
 
                     <thead>
-                        <td>籠號</td>
-                        <td>位置</td>
-                        <td>籠內動物數量</td>
-                         <td style="width:6em;">修改</td>
-                        <td style="width:6em;">管理動物</td>
+                        <td style="width:6em;">籠號</td>
+                        <td style="width:6em;">修改</td>
+                        <td style="width:6em;">管理</td>
+                        <td style="width:6em;">位置</td>
+                        <td style="width:6em;">動物數量</td>
+
                     </thead>
 
                     <tbody>
 
                         <tr dir-paginate="c in cages | filter:keyword| orderBy:sortType:sortReverse|itemsPerPage: pageSize" pagination-id="cages">
                             <td>{[{c.no}]}</td>
-                            <td>{[{c.position}]}</td>
-                            <td>{[{getCount(c.no)}]}</td>
-                             <td>
+                            <td>
                                 <a class="btn btn-info" ng-click="updateCage(c)">修改</a>
 
                             </td>
@@ -47,6 +57,9 @@
                                 <a class="btn btn-info" ng-click="toggleAnimalInCage(c)">管理</a>
 
                             </td>
+                            <td>{[{c.position}]}</td>
+                            <td>{[{getCount(c.no)}]}</td>
+
                         </tr>
 
                     </tbody>
@@ -335,14 +348,39 @@
         <span us-spinner=" {radius:30, width:8, length: 16}"></span>
 
         <div class="bs-callout bs-callout-primary">
-            <h2><code>籠子編號: {[{cage.no}]}</code> 動物列表</h2>
+            <div class="row">
+
+                <div class="col-sm-3">
+                    <h3><code>籠子編號: {[{cage.no}]}</code> 動物列表</h3>
+                </div>
+
+            </div>
 
 
         </div>
 
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#animalInCageAdd">
-        新增動物
-        </button>
+        <div class="row">
+            <div class="col-sm-3">
+                 <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#animalInCageAdd">
+                    新增動物
+                </button>
+            </div>
+            <div class="col-sm-3">
+
+                        <button class="btn btn-primary btn-lg dropdown-toggle btn-block" type="button" data-toggle="dropdown">攝影機
+                        </button>
+                        <ul class="dropdown-menu btn-block">
+                            <li class="btn btn-danger btn-block" ng-click="openCam(cage)">觀看</li>
+                            <li class="btn btn-info btn-block" ng-click="turnOnCam(cage)">開啟</li>
+                            <li class="btn btn-warning btn-block" ng-click="turnOffCam(cage)">關閉</li>
+                        </ul>
+            </div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3"></div>
+        </div>
+       
+
+        
 
 
         <div id="animalList">
@@ -353,7 +391,7 @@
                 <table class="table table-bordered table-striped">
 
                     <thead>
-                        <td>全選
+                        <td style="width:4em;">全選
                             <input type="checkbox" ng-click="checkAll()" ng-model="masterCheck">
                         </td>
                         <td style="width:6em;">編輯</td>
