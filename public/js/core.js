@@ -1,7 +1,8 @@
-var app = angular.module('app', ['ngLoadingSpinner','angularUtils.directives.dirPagination','ui.router']);
+var app = angular.module('app', ['ngLoadingSpinner','angularUtils.directives.dirPagination','ui.router','ngMessages']);
 app.config(['$locationProvider','$anchorScrollProvider', function($locationProvider,$anchorScrollProvider){
     $locationProvider.html5Mode(true);    
     $anchorScrollProvider.disableAutoScrolling();
+    
 }]);
 
 
@@ -158,6 +159,25 @@ app.controller('animalCtrl', function($scope, $filter, $q, $http) {
 //// Cage Controller Start
 app.controller('cageCtrl', function($scope, $filter, $q, $http,$rootScope,filterFilter) {
     
+    // $scope.CageFormAddsubmit = function($event){
+    //     if($scope.cageForm.$valid){
+    //         $scope.addCage();
+    //     }
+    //     else{
+    //         $scope.cageForm.cageNo.$touched = true;
+    //     }
+    // }
+    
+    $scope.checkCageNo = function(typingCageNo){        //檢查有沒有重複的cageNo
+      if(typeof typingCageNo==="undefined"){return;} 
+      if($scope.cages&&filterFilter( $scope.cages, {no:typingCageNo},true).length>0){
+          return true;
+      }
+      else{
+          return false;
+      }
+        
+    }
 
     $("#cageEdit").on('hide.bs.modal',function(){
         $scope.errors = [];
