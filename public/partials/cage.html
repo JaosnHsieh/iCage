@@ -151,7 +151,7 @@
                                 </div>
                                 <div class="col-sm-6 form-group">
                                    <label for="">感應器ip<strong class="text-danger"></strong></label>
-                                    <input class="form-control" type="text" ng-model="cage.ip">
+                                    <input class="form-control" pattern="^((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))*$" type="text" ng-model="cage.ip">
                                 </div>
                             </div>
 
@@ -187,7 +187,7 @@
                 </center>
             </div>
 
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
 
                 <div class="modal-content">
 
@@ -197,98 +197,72 @@
                     </div>
 
 
-
-                    <div>
-                        <div class="dropdown pull-right">
-                            <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">刪除
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li class="btn btn-danger btn-block" ng-click="deleteCage(editCage)">是</li>
-                                <li class="btn btn-primary  btn-block">否</li>
-                            </ul>
+                    <div class="row">
+                        <div class="col-sm-2 col-sm-offset-10">
+                            <div class="dropdown">
+                                <button class="btn btn-block btn-danger dropdown-toggle" type="button" data-toggle="dropdown">刪除
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li class="btn btn-danger btn-block" ng-click="deleteCage(editCage)">是</li>
+                                    <li class="btn btn-primary  btn-block">否</li>
+                                </ul>
+                            </div>
                         </div>
 
+                    </div>
                         <form name="cageFormUpdate" ng-submit="submitUpdatecage()" >
 
 
-                            <div class="form-group row">
-                                <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-6 form-group">
                                     <label for="">籠號<strong class="text-danger">*(必填)</strong></label>
-
-
                                     <input class="form-control" type="text" ng-model="editCage.no" required>
+                                
                                 </div>
-
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-sm-12">
+                                <div class="col-sm-6 form-group">
                                     <label for="">CustomerId<strong class="text-danger"></strong></label>
-
-
                                     <input class="form-control" type="text" ng-model="editCage.customerId">
+                               
                                 </div>
-
                             </div>
+                          
 
-                            <div class="form-group row">
-                                <div class="col-sm-12">
-                                    <label for="">qrCodeId<strong class="text-danger"></strong></label>
-
-
+                           <div class="row">
+                               <div class="col-sm-6 form-group">
+                                   <label for="">qrCodeId<strong class="text-danger"></strong></label>
                                     <input class="form-control" type="text" ng-model="editCage.qrCodeId">
-                                </div>
-
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-sm-12">
-                                    <label for="">位置<strong class="text-danger"></strong></label>
-
-
+                               </div>
+                               <div class="col-sm-6 form-group">
+                                   <label for="">位置<strong class="text-danger"></strong></label>
                                     <input class="form-control" type="text" ng-model="editCage.position">
-                                </div>
+                               </div>
+                           </div>
 
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-sm-12">
-                                    <label for="">狀態<strong class="text-danger"></strong></label>
-
-
+                           <div class="row">
+                               <div class="col-sm-6 form-group">
+                                   <label for="">狀態<strong class="text-danger"></strong></label>
                                     <input class="form-control" type="text" ng-model="editCage.status">
-                                </div>
-
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-sm-12">
+                               </div>
+                               <div class="col-sm-6 form-group">
                                     <label for="">感應器IP<strong class="text-danger"></strong></label>
-
-
-                                    <input class="form-control" type="text" ng-model="editCage.ip">
-                                </div>
-
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-sm-12">
+                                    <input class="form-control" type="text" pattern="^((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))*$" ng-model="editCage.ip">
+                               </div>
+                           </div>
+                            
+                           <div class="row">
+                               <div class="col-sm-6 form-group">
                                     <label for="">備註<strong class="text-danger"></strong></label>
-
-
                                     <input class="form-control" type="text" ng-model="editCage.memo">
-                                </div>
+                               </div>
+                           </div>
 
-                            </div>
-
-                            <div class="form-group row">
+                           <div class="form-group row">
                                 <div class="col-sm-12">
-                                    <input class="form-control  btn-primary" type="submit">
+                                    <button class="btn-block btn-lg btn-primary" type="submit">送出</button>
                                 </div>
                             </div>
 
                         </form>
-                    </div>
 
 
 
