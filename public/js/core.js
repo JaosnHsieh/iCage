@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngLoadingSpinner','angularUtils.directives.dirPagination','ui.router','ngMessages']);
+var app = angular.module('app', ['ngLoadingSpinner','angularUtils.directives.dirPagination','ui.router','chart.js']);
 app.config(['$locationProvider','$anchorScrollProvider', function($locationProvider,$anchorScrollProvider){
     $locationProvider.html5Mode(true);    
     $anchorScrollProvider.disableAutoScrolling();
@@ -263,11 +263,9 @@ app.controller('cageCtrl', function($scope, $filter, $q, $http,$rootScope,filter
 
     $scope.deleteCage = function(a){
         
-        $scope.showError = false;
 
         if($rootScope.getSharedAnimal().length>0){
             $scope.errors.push({msg:'請先刪除或轉移籠子內的動物'});
-            $scope.showError=true;
         }
         else{
             $http({ 
@@ -630,3 +628,21 @@ app.controller('eventCtrl', function($scope, $filter, $q, $http) {
 });
 
 ////Strain Controller End
+
+
+//// index Controll start
+
+app.controller('indexCtrl', function($scope, $filter,$http) {
+     $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  $scope.series = ['Series A', 'Series B','qq'];
+
+  $scope.data = [
+    [65, 59, 80, 81, 56, 55, 40],
+    [28, 48, 40, 19, 86, 27, 90],
+    [28, 48, 40, 19, 86, 27, 90]
+  ];
+
+});
+
+
+//// index Controll end

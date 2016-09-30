@@ -1,4 +1,4 @@
-
+ <div ng-controller="indexCtrl">
 
           <h1 class="page-header">首頁</h1>
 
@@ -16,6 +16,13 @@
             
           </div>
 
-          <h2 class="sub-header">放些圖表資料在這</h2>
+         <button ng-click="test1()">111</button>
+          <canvas id="bar" class="chart chart-bar" 
+          chart-data="data" chart-labels="labels" chart-series="series">
+          </canvas>
+
+</div>
+
+          <!--<h2 class="sub-header">放些圖表資料在這</h2>
           <h3>目前動物數量:100隻</h3>
-          <h3>目前籠子數量:49籠</h3>
+          <h3>目前籠子數量:49籠</h3>-->
