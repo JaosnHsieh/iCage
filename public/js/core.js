@@ -5,8 +5,6 @@ app.config(['$locationProvider','$anchorScrollProvider', function($locationProvi
     
 }]);
 
-
-
 // app.controler('mainController',function mainController($scope, $http) {   
 // });
 app.config(function($interpolateProvider,paginationTemplateProvider,$stateProvider) {
@@ -158,6 +156,8 @@ app.controller('animalCtrl', function($scope, $filter, $q, $http) {
 
 //// Cage Controller Start
 app.controller('cageCtrl', function($scope, $filter, $q, $http,$rootScope,filterFilter) {
+
+  
     
     // $scope.CageFormAddsubmit = function($event){
     //     if($scope.cageForm.$valid){
@@ -302,7 +302,7 @@ app.controller('cageCtrl', function($scope, $filter, $q, $http,$rootScope,filter
 //// Cage Controller End
 
 //// AnimalInCage Controller Start
-app.controller('animalInCageCtrl', function($scope, $filter, $q, $http,$rootScope) {
+app.controller('animalInCageCtrl', function($scope, $filter, $q, $http,$rootScope,filterFilter) {
 
      Array.prototype.getIndexBy = function (name, value) {  //// 這個function可以全部js用一次就好
   for (var i = 0; i < this.length; i++) {
@@ -312,6 +312,23 @@ app.controller('animalInCageCtrl', function($scope, $filter, $q, $http,$rootScop
   }
   return -1;
 }
+
+    
+      $scope.switchCage = function(){
+          alert(123);
+      }
+
+      $scope.isSelected = function(){
+          if(typeof filterFilter( $scope.animals, {isSelected:true},true)==="undefined"){return;}
+          
+          if(filterFilter( $scope.animals, {isSelected:true},true).length>0){
+              return true;
+          }
+          else{
+              return false;
+          }
+    }
+
 
   $scope.sourceIndex = function (keyName, key) {
 
@@ -633,14 +650,64 @@ app.controller('eventCtrl', function($scope, $filter, $q, $http) {
 //// index Controll start
 
 app.controller('indexCtrl', function($scope, $filter,$http) {
-     $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  $scope.series = ['Series A', 'Series B','qq'];
 
-  $scope.data = [
+    Chart.defaults.global.colors = [ '#16a085', '#27ae60', '#2c3e50', '#f39c12', '#FDB45C', '#FB6964', '#342224'];
+
+
+    ////Bar Chart
+    $scope.barChart = {};
+    $scope.barChart.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+    $scope.barChart.series = ['Series A', 'Series B','qq'];
+    $scope.barChart.data = [
     [65, 59, 80, 81, 56, 55, 40],
     [28, 48, 40, 19, 86, 27, 90],
     [28, 48, 40, 19, 86, 27, 90]
   ];
+
+  ////Bar Chart end
+
+  ////Line Chart
+  $scope.lineChart = {};
+  $scope.lineChart.labels = ["January", "February", "March", "April", "May", "June", "July"];
+  $scope.lineChart.series = ['Series A'];
+  $scope.lineChart.data = [
+    [65, 59, 80, 81, 56, 55, 40]
+  ];
+  $scope.onClick = function (points, evt) {
+    console.log(points, evt);
+  };
+  $scope.lineChart.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
+  $scope.lineChart.options = {
+    scales: {
+      yAxes: [
+        {
+          id: 'y-axis-1',
+          type: 'linear',
+          display: true,
+          position: 'left'
+        },
+        {
+          id: 'y-axis-2',
+          type: 'linear',
+          display: true,
+          position: 'right'
+        }
+      ]
+    }
+  };
+
+  ////Line Chart end
+
+
+  //// Pie Chart
+  $scope.pieChart = {};
+  $scope.pieChart.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+  $scope.pieChart.data = [300, 500, 100];
+
+  //// Pie Chart end
+
+
+
 
 });
 

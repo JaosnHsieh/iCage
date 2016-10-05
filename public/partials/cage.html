@@ -306,6 +306,14 @@
         </div>
 
         <div class="row">
+            <div class="col-sm-3" ng-show="isSelected()">
+                
+                <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#switchCageModal">
+                    更換籠子
+                </button>
+
+            </div>
+
             <div class="col-sm-3">
                 <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#animalInCageAdd">
                     新增動物
@@ -321,7 +329,6 @@
                     <li class="btn btn-warning btn-block" ng-click="turnOffCam(cage)">關閉</li>
                 </ul>
             </div>
-            <div class="col-sm-3"></div>
             <div class="col-sm-3"></div>
         </div>
 
@@ -384,7 +391,8 @@
 
                 </table>
             </div>
-            <!-- angular 分頁 start -->
+            
+            <!--  分頁 start -->
             <div class="form-group row">
                 <div class="col-sm-2">
                     每頁顯示數量:
@@ -403,11 +411,11 @@
                 </div>
 
                 <div class="col-sm-6">
-                    <dir-pagination-controls pagination-id="animals"></dir-pagination-controls>
+                    <dir-pagination-controls on-page-change="onPageChange(newPageNumber)" pagination-id="animals"></dir-pagination-controls>
                 </div>
 
             </div>
-            <!-- angular 分頁 end -->
+            <!--  分頁 end -->
 
         </div>
 
@@ -527,7 +535,7 @@
                 </div>
             </div>
         </div>
-        <!--animalInCage Add start-->
+        <!--animalInCage Add end-->
 
         <!--animalInCage Edit start-->
 
@@ -628,8 +636,56 @@
             </div>
         </div>
         <!--animalInCage Edit End-->
-    </div>
-    <!--animalInCageCtrl end-->
+
+
+         <!--switchCage Start-->
+    <div class="modal fade" id="switchCageModal">
+
+            <div class="modal-dialog modal-sm" role="document">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        更換籠子    
+                    </div>
+
+                    <form name="" ng-submit="">
+
+
+                        <div class="row">
+
+                            <div class="col-sm-6 form-group">
+                                <label for="">籠子編號<strong class="text-danger"></strong></label>
+                                <input class="form-control" type="text" ng-model="cage.no" disabled="true" required>
+
+                            </div>
+
+                            <div class="col-sm-6 form-group">
+                                <label for="">新籠子編號<strong class="text-danger">*(必填)</strong></label>
+                                <input class="form-control" type="text" ng-model="animal.animalNo" required>
+                            </div>
+
+                        </div>
+
+                    
+
+                    </form>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+        <!-- switchCage end-->
+
+
+    </div>     <!--animalInCageCtrl end-->
+
+
+   
+
 
 
 
