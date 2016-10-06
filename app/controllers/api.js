@@ -13,7 +13,6 @@ module.exports = function (app) {
 
 
 router.post('/login', function (req, res) {
-    console.log('qqqqqqqqqq',req.body.pwd);
      db.User.find({
       where: {
         username: req.body.username,
@@ -147,9 +146,8 @@ router.put('/animals', (req, res, next) => {
     }
   }).then(function (data) {
     // project will be the first entry of the Projects table with the title 'aProject' || null
-    data.updateAttributes(animal).then(function (todo) {
-      res.json(todo);
-      console.log('update successfully');
+    data.updateAttributes(animal).then(function (animal) {
+      res.status(200).send('animal updated successfully');
     });
 
   });
