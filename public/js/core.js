@@ -333,19 +333,56 @@ app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootSc
         return -1;
     }
 
+    $scope.deleteSelectedAnimalsInCage = function(oldCageNo){
+
+         var selectedAnimals = filterFilter($scope.animals, {
+            isSelected: true
+        }, true)
+
+         var qPromiseArr = [];
+        for (var i = 0; i < selectedAnimals.length; i++) {
+            
+            qPromiseArr.push($http({
+                method: 'DELETE',
+                url: '/api/animals',
+                data: selectedAnimals[i],
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }));
+        }
+        $q.all(qPromiseArr)
+            .then(function (dataList) {
+                 $scope.masterCheck = false;
+                $http.get('/api/animals?cageNo=' + oldCageNo).success(function (data) {
+                    $scope.animals = data;
+                    $("#deleteAnimalsModal").modal('hide');
+                     $http.get('/api/animals').success(function (data) {
+                        $rootScope.animalsForCounting = data;
+
+                    });
+
+            })
+            .catch(function(err){
+                console.log(err);
+            });
+        });
+
+    }
+
     $scope.switchCage = function (oldCageNo, newCageNo) {
 
 
-        var switchingCageAnimals = filterFilter($scope.animals, {
+        var selectedAnimals = filterFilter($scope.animals, {
             isSelected: true
         }, true)
         var qPromiseArr = [];
-        for (var i = 0; i < switchingCageAnimals.length; i++) {
-            switchingCageAnimals[i].cageNo = newCageNo;
+        for (var i = 0; i < selectedAnimals.length; i++) {
+            selectedAnimals[i].cageNo = newCageNo;
             qPromiseArr.push($http({
                 method: 'PUT',
                 url: '/api/animals',
-                data: switchingCageAnimals[i],
+                data: selectedAnimals[i],
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -504,6 +541,7 @@ app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootSc
             .success(function (animal) {
 
                 $scope.editAnimal = null;
+                $scope.masterCheck = false;
                 $http.get('/api/animals?cageNo=' + $scope.cage.no).success(function (data) {
 
                     $scope.animals = data;
