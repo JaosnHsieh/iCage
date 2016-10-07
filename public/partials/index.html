@@ -1,57 +1,64 @@
 <div ng-controller="indexCtrl">
+        <span us-spinner="{radius:30, width:8, length: 16}"></span>
+
+
+
 
   <div class="row">
 
-    <div class="col-sm-6">
+      <div class="col-sm-6">
 
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          Line Chart
-        </div>
-        <div class="panel-body">
-          <canvas id="bar" class="chart chart-bar" chart-data="barChart.data" chart-labels="barChart.labels" chart-series="barChart.series">
-          </canvas>
-        </div>
-      </div>
-
-
-    </div>
-    <div class="col-sm-6">
-      <div class="panel panel-default">
-
-        <div class="panel-heading">
-          Bar Chart
-        </div>
-
-        <div class="panel-body">
-
-          <canvas id="line" class="chart chart-line" chart-data="lineChart.data" chart-labels="lineChart.labels" chart-series="lineChart.series" chart-options="lineChart.options"
-            chart-dataset-override="lineChart.datasetOverride" chart-click="onClick" </canvas>
-
-        </div>
-
-      </div>
-    </div>
-
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="panel paenl-default">
-                <div class="panel-heading">
-                    PieChart
-                </div>
-                <div class="panel-body">
-                   <canvas id="pie" class="chart chart-pie"
-                    chart-data="pieChart.data" chart-labels="pieChart.labels" chart-options="pieChart.options">
-                  </canvas> 
-                </div>
-              </div>
-             
-            </div>
-            <div class="col-sm-6"></div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Line Chart
           </div>
+          <div class="panel-body">
+            <canvas id="bar" class="chart chart-bar" chart-data="barChart.data" chart-labels="barChart.labels" chart-series="barChart.series">
+            </canvas>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="col-sm-6">
+        <div class="panel panel-default">
+
+          <div class="panel-heading">
+            Bar Chart
+          </div>
+
+          <div class="panel-body">
+
+            <canvas id="line" class="chart chart-line" chart-data="lineChart.data" chart-labels="lineChart.labels" chart-series="lineChart.series"
+              chart-options="lineChart.options" chart-dataset-override="lineChart.datasetOverride" chart-click="onClick" </canvas>
+
+          </div>
+
+        </div>
+      </div>
 
   </div>
 
+  <div class="row">
+
+      <div class="col-sm-6">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            籠內動物數量
+          </div>
+          <div class="panel-body">
+             <canvas id="pie" class="chart chart-pie" chart-options="pieChart.options" chart-data="pieChart.data" chart-labels="pieChart.labels" chart-options="pieChart.options">
+              </canvas>
+          </div>
+        </div>
+
+
+      </div>
+    
+  </div>
+ 
 
 </div>
 

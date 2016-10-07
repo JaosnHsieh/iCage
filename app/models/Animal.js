@@ -14,7 +14,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     animalNo: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+      unique:true
     },
     status:{
       type: DataTypes.INTEGER,

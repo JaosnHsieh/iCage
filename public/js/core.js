@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngLoadingSpinner', 'angularUtils.directives.dirPagination', 'ui.router', 'chart.js']);
+var app = angular.module('app', ['ngLoadingSpinner', 'angularUtils.directives.dirPagination', 'ui.router', 'chart.js','angular.filter']);
 app.config(['$locationProvider', '$anchorScrollProvider', function ($locationProvider, $anchorScrollProvider) {
     $locationProvider.html5Mode(true);
     $anchorScrollProvider.disableAutoScrolling();
@@ -164,7 +164,6 @@ app.controller('animalCtrl', function ($scope, $filter, $q, $http) {
 app.controller('cageCtrl', function ($scope, $filter, $q, $http, $rootScope, filterFilter) {
 
 
-
     // $scope.CageFormAddsubmit = function($event){
     //     if($scope.cageForm.$valid){
     //         $scope.addCage();
@@ -197,7 +196,7 @@ app.controller('cageCtrl', function ($scope, $filter, $q, $http, $rootScope, fil
     });
 
     $scope.getCount = function (cageNo) {
-
+        if($rootScope.animalsForCounting==='undefined'){return;}
         return filterFilter($rootScope.animalsForCounting, {
             cageNo: cageNo
         }, true).length;
@@ -324,6 +323,8 @@ app.controller('cageCtrl', function ($scope, $filter, $q, $http, $rootScope, fil
 //// AnimalInCage Controller Start
 app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootScope, filterFilter) {
 
+
+
     Array.prototype.getIndexBy = function (name, value) { //// 這個function可以全部js用一次就好
         for (var i = 0; i < this.length; i++) {
             if (this[i][name] == value) {
@@ -333,15 +334,15 @@ app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootSc
         return -1;
     }
 
-    $scope.deleteSelectedAnimalsInCage = function(oldCageNo){
+    $scope.deleteSelectedAnimalsInCage = function (oldCageNo) {
 
-         var selectedAnimals = filterFilter($scope.animals, {
+        var selectedAnimals = filterFilter($scope.animals, {
             isSelected: true
         }, true)
 
-         var qPromiseArr = [];
+        var qPromiseArr = [];
         for (var i = 0; i < selectedAnimals.length; i++) {
-            
+
             qPromiseArr.push($http({
                 method: 'DELETE',
                 url: '/api/animals',
@@ -353,20 +354,20 @@ app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootSc
         }
         $q.all(qPromiseArr)
             .then(function (dataList) {
-                 $scope.masterCheck = false;
+                $scope.masterCheck = false;
                 $http.get('/api/animals?cageNo=' + oldCageNo).success(function (data) {
-                    $scope.animals = data;
-                    $("#deleteAnimalsModal").modal('hide');
-                     $http.get('/api/animals').success(function (data) {
-                        $rootScope.animalsForCounting = data;
+                        $scope.animals = data;
+                        $("#deleteAnimalsModal").modal('hide');
+                        $http.get('/api/animals').success(function (data) {
+                            $rootScope.animalsForCounting = data;
 
+                        });
+
+                    })
+                    .catch(function (err) {
+                        console.log(err);
                     });
-
-            })
-            .catch(function(err){
-                console.log(err);
             });
-        });
 
     }
 
@@ -390,21 +391,21 @@ app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootSc
         }
         $q.all(qPromiseArr)
             .then(function (dataList) {
-                 $scope.masterCheck = false;
+                $scope.masterCheck = false;
                 $http.get('/api/animals?cageNo=' + oldCageNo).success(function (data) {
-                    $scope.animals = data;
-                    $scope.newCageNo='';
-                    $("#switchCageModal").modal('hide');
-                   
-                     $http.get('/api/animals').success(function (data) {
-                        $rootScope.animalsForCounting = data;
-                    });
+                        $scope.animals = data;
+                        $scope.newCageNo = '';
+                        $("#switchCageModal").modal('hide');
 
-            })
-            .catch(function(err){
-                console.log(err);
+                        $http.get('/api/animals').success(function (data) {
+                            $rootScope.animalsForCounting = data;
+                        });
+
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                    });
             });
-        });
 
 
     }
@@ -518,6 +519,9 @@ app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootSc
                 });
 
 
+            })
+            .error(function () {
+                $('#myModal').modal('show');
             });
 
     };
@@ -815,10 +819,28 @@ app.controller('indexCtrl', function ($scope, $filter, $http) {
     ////Line Chart end
 
 
+
     //// Pie Chart
-    $scope.pieChart = {};
-    $scope.pieChart.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-    $scope.pieChart.data = [300, 500, 100];
+    $http.get('/api/animals').success(function (animals) {
+        
+        $scope.pieChart = {};
+        $scope.pieChart.labels = [];
+        $scope.pieChart.data = [];
+        
+        angular.forEach($filter('unique')(animals,'cageNo'),function(value,key){
+            $scope.pieChart.labels.push('籠號: '+value.cageNo);
+            $scope.pieChart.data.push($filter('filterBy')(animals,['cageNo'],value.cageNo).length);
+        });
+
+        
+        $scope.pieChart.options = {
+            legend: {
+                display: true
+            }
+        };
+
+    });
+
 
     //// Pie Chart end
 

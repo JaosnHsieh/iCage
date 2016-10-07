@@ -131,6 +131,7 @@ router.post('/animals', (req, res) => {
     })
     .catch(function (err) {
       console.log('err', err);
+    res.status(400).send('出事');
     });
 
 });
