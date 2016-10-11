@@ -196,7 +196,7 @@ app.controller('cageCtrl', function ($scope, $filter, $q, $http, $rootScope, fil
     });
 
     $scope.getCount = function (cageNo) {
-        if($rootScope.animalsForCounting==='undefined'){return;}
+        if(typeof $rootScope.animalsForCounting==='undefined'){return;}
         return filterFilter($rootScope.animalsForCounting, {
             cageNo: cageNo
         }, true).length;
