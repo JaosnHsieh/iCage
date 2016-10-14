@@ -266,3 +266,6 @@ body {
 #bottomNav a:hover {
     color:#fff;
 }
+html {
+  touch-action: manipulation;
+}

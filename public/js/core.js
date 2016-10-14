@@ -5,6 +5,9 @@ app.config(['$locationProvider', '$anchorScrollProvider', function ($locationPro
 
 }]);
 
+app.run(function(){
+    FastClick.attach(document.body);
+});
 // app.controler('mainController',function mainController($scope, $http) {   
 // });
 app.config(function ($interpolateProvider, paginationTemplateProvider, $stateProvider) {
