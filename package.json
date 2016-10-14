@@ -17,6 +17,7 @@
     "express-handlebars": "^3.0.0",
     "express-session": "^1.14.1",
     "glob": "^6.0.4",
+    "lodash": "^4.16.4",
     "method-override": "^2.3.0",
     "moment": "^2.15.0",
     "morgan": "^1.6.1",

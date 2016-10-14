@@ -2,7 +2,8 @@
 let express = require('express'),
   router = express.Router(),
   db = require('../models'),
-  moment = require('moment');
+  moment = require('moment'),
+  _ = require('lodash');
 
 module.exports = function (app) {
   app.use('/api', router);
@@ -422,3 +423,49 @@ router.get('/users', function (req, res) {
     }
   });
 });
+
+
+var vibrateData = {
+  v:[],
+  t:[]
+};
+// 收感應器的資料
+router.post('/vibrate',function(req,res){
+   
+    _.mergeWith(vibrateData, req.body, customizer);
+    if(vibrateData.t.length>=100){
+
+      let vibrate = db.Vibrate.build();
+
+      vibrate.data = JSON.stringify(vibrateData);
+
+      vibrate.updatedAt = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
+      vibrate.createdAt = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
+
+      vibrate.save()
+        .then(function (data) {
+          res.send('');
+        })
+        .catch(function (err) {
+          console.log('----------err-----------', err);
+        });
+ 
+      vibrateData = {
+        v:[],
+        t:[]
+      };
+
+    }
+    else{
+
+      res.send('');
+
+    }
+		
+    function customizer(objValue, srcValue) {
+    if (_.isArray(objValue)) {
+    return objValue.concat(srcValue);
+      }
+    }
+
+	});

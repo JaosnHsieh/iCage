@@ -103,6 +103,7 @@ module.exports = function (app, config) {
     require(controller)(app);
   });
 
+  
 
   app.all('/*', function (req, res, next) {
     // Just send the index.html for other files to support HTML5Mode
@@ -110,7 +111,6 @@ module.exports = function (app, config) {
       root: config.root + '/public'
     });
   });
-
 
   app.use(function (req, res, next) {
     var err = new Error('Not Found');
