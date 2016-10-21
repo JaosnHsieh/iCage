@@ -9,12 +9,11 @@ module.exports = function (app) {
   app.use('/api', router);
 };
 
-
 //// login and signup start
 
 
 router.post('/login', function (req, res) {
-     db.User.find({
+  db.User.find({
       where: {
         username: req.body.username,
         password: req.body.pwd
@@ -22,7 +21,7 @@ router.post('/login', function (req, res) {
     })
     .then((user) => {
       if (user == null) {
-        res.send('帳號或密碼錯誤!!')        
+        res.send('帳號或密碼錯誤!!')
       } else {
         req.session.user = user;
         req.session.login = true;
@@ -106,7 +105,7 @@ router.get('/animals', (req, res) => {
 
 router.post('/animals', (req, res) => {
 
-  console.log(moment().format('YYYY-MM-DD HH:mm:ss.SSS'));
+
 
   let data = req.body;
   let animal = db.Animal.build();
@@ -132,7 +131,7 @@ router.post('/animals', (req, res) => {
     })
     .catch(function (err) {
       console.log('err', err);
-    res.status(400).send('出事');
+      res.status(400).send('出事');
     });
 
 });
@@ -340,13 +339,29 @@ router.delete('/strains', (req, res, next) => {
 //// event table start
 
 router.get('/events', (req, res) => {
-  db.Event.findAll()
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.send(err);
-    });
+
+
+  if (Object.keys(req.query) != 0) { // 有query資料
+    db.Event.findAll({
+        where: req.query
+      })
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  } else {  //沒query資料
+    db.Event.findAll()
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  }
+
+
 });
 
 router.post('/events', (req, res) => {
@@ -426,46 +441,51 @@ router.get('/users', function (req, res) {
 
 
 var vibrateData = {
-  v:[],
-  t:[]
+  v: [],
+  t: []
 };
 // 收感應器的資料
-router.post('/vibrate',function(req,res){
-   
-    _.mergeWith(vibrateData, req.body, customizer);
-    if(vibrateData.t.length>=100){
+router.post('/vibrate', function (req, res) {
 
-      let vibrate = db.Vibrate.build();
+  _.mergeWith(vibrateData, req.body, customizer);
+  if (vibrateData.t.length >= 100) {
 
-      vibrate.data = JSON.stringify(vibrateData);
+    let vibrate = db.Vibrate.build();
 
-      vibrate.updatedAt = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
-      vibrate.createdAt = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
+    vibrate.data = JSON.stringify(vibrateData);
 
-      vibrate.save()
-        .then(function (data) {
-          res.send('');
-        })
-        .catch(function (err) {
-          console.log('----------err-----------', err);
-        });
- 
-      vibrateData = {
-        v:[],
-        t:[]
-      };
+    vibrate.updatedAt = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
+    vibrate.createdAt = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
 
-    }
-    else{
+    vibrate.save()
+      .then(function (data) {
+        res.send('');
+      })
+      .catch(function (err) {
+        console.log('----------err-----------', err);
+      });
 
-      res.send('');
+    vibrateData = {
+      v: [],
+      t: []
+    };
 
-    }
-		
-    function customizer(objValue, srcValue) {
+  } else {
+
+    res.send('');
+
+  }
+
+  function customizer(objValue, srcValue) {
     if (_.isArray(objValue)) {
-    return objValue.concat(srcValue);
-      }
+      return objValue.concat(srcValue);
     }
+  }
 
-	});
+});
+
+
+router.all('/*',function(req,res){
+  res.status(500).send('error');
+  
+});

@@ -307,7 +307,7 @@
         <div class="row">
 
             <div class="col-sm-3" ng-show="isSelected()">
-                
+
                 <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#switchCageModal">
                     更換籠子
                 </button>
@@ -316,7 +316,7 @@
 
             <div class="col-sm-3" ng-show="isSelected()">
 
-                  <button type="button" class="btn btn-danger btn-lg btn-block" data-toggle="modal" data-target="#deleteAnimalsModal">
+                <button type="button" class="btn btn-danger btn-lg btn-block" data-toggle="modal" data-target="#deleteAnimalsModal">
                     刪除選取動物
                 </button>
 
@@ -399,7 +399,7 @@
 
                 </table>
             </div>
-            
+
             <!--  分頁 start -->
             <div class="form-group row">
                 <div class="col-sm-2">
@@ -441,16 +441,29 @@
 
                     <form name="animalForm" ng-submit="addAnimal()">
 
-                         <div class="row">
+                        <div class="row">
 
                             <div class="col-sm-6 form-group">
                                 <label for="">原因<strong class="text-danger"></strong></label>
-                                <input class="form-control" type="text" ng-model="cage.no" disabled="true" required>
+                                
+                                 <select class="form-control"
+                                    ng-model="selectedEventIdNo" 
+                                    ng-options="e.idNo as e.name for e in events" 
+                                    ng-change="selectedEventMemo=(events|filter:{idNo:selectedEventIdNo})[0].memo">
+                                 </select>
+
+                            </div>
+
+
+
+                            <div class="col-sm-6 form-group">
+                                <label for="">原因備註說明<strong class="text-danger"></strong></label>
+                               <p>{[{selectedEventMemo}]}</p>
 
                             </div>
 
                         </div>
-                        
+
                         <div class="row">
 
                             <div class="col-sm-6 form-group">
@@ -655,19 +668,19 @@
         <!--animalInCageModal Edit End-->
 
 
-         <!--switchCageModal Start-->
-    <div class="modal fade" id="switchCageModal">
+        <!--switchCageModal Start-->
+        <div class="modal fade" id="switchCageModal">
 
             <div class="modal-dialog modal-sm" role="document">
 
                 <div class="modal-content">
 
                     <div class="modal-header">
-                         
-                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
                         <h1>更換籠子</h1>
-                            
+
                     </div>
 
                     <form name="switchCageForm" ng-submit="switchCage(cage.no,newCageNo)">
@@ -691,19 +704,19 @@
                         <div class="modal-footer">
 
                             <div class="row form-group">
-                               
+
                                 <div class="col-sm-5"></div>
                                 <div class="col-sm-2"></div>
 
-                                 <div class="col-sm-5">
+                                <div class="col-sm-5">
                                     <button class="btn-block btn-primary btn-lg" type="submit">送出</button>
                                 </div>
-                                
+
                             </div>
 
                         </div>
 
-                    
+
 
                     </form>
 
@@ -719,37 +732,37 @@
 
         <!--deleteAnimalsModal Start-->
 
-    <div class="modal fade" id="deleteAnimalsModal">
+        <div class="modal fade" id="deleteAnimalsModal">
 
             <div class="modal-dialog modal-sm" role="document">
 
                 <div class="modal-content">
 
                     <div class="modal-header">
-                         
-                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
                         <h3 class="alert alert-danger">確定刪除?</h3>
-                            
+
                     </div>
 
-                    
-                            <div class="row form-group">
-                               
-                                <div class="col-sm-5">
-                                <button class="btn-block btn-default btn-lg" data-dismiss="modal">取消</button>
-                                </div>
-                                <div class="col-sm-2"></div>
 
-                                 <div class="col-sm-5">
-                                    <button class="btn-block btn-primary btn-lg" ng-click="deleteSelectedAnimalsInCage(cage.no)">確定</button>
-                                </div>
-                                
-                            </div>
+                    <div class="row form-group">
 
-                   
+                        <div class="col-sm-5">
+                            <button class="btn-block btn-default btn-lg" data-dismiss="modal">取消</button>
+                        </div>
+                        <div class="col-sm-2"></div>
 
-                    
+                        <div class="col-sm-5">
+                            <button class="btn-block btn-primary btn-lg" ng-click="deleteSelectedAnimalsInCage(cage.no)">確定</button>
+                        </div>
+
+                    </div>
+
+
+
+
 
                     </form>
 
@@ -771,7 +784,9 @@
 
 
 
-    </div>     <!--animalInCageCtrl end-->
+    </div>
+    <!--animalInCageCtrl end-->
 
 
-</div>   <!--cageCtrl end-->
+</div>
+<!--cageCtrl end-->

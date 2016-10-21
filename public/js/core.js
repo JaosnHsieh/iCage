@@ -246,13 +246,13 @@ app.controller('cageCtrl', function ($scope, $filter, $q, $http, $rootScope, fil
     };
 
     $scope.updateCage = function (c) {
-        $scope.$broadcast('loadAniamlInCage', c);
+        $scope.$broadcast('loadAnimalInCage', c);
         $scope.editCage = c;
         $('#cageEdit').modal('show');
     };
 
     $scope.toggleAnimalInCage = function (c) {
-        $scope.$broadcast('updateCage', c);
+        $scope.$broadcast('updateCage', c); //在籠子管理點下 '管理' 按鈕，讀取籠內動物資料
 
     }
 
@@ -326,6 +326,24 @@ app.controller('cageCtrl', function ($scope, $filter, $q, $http, $rootScope, fil
 //// AnimalInCage Controller Start
 app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootScope, filterFilter) {
 
+    //讀取資料
+
+        //新增動物的原因
+        $http.get('/api/events?inOut=1')
+            .success(function(data){
+                $scope.events = data;
+                console.log($scope.events);
+            })
+            .error(function(err){
+                console.log(err);
+            }); 
+        //新增動物的原因 end
+
+
+
+
+    //讀取資料 end
+
 
 
     Array.prototype.getIndexBy = function (name, value) { //// 這個function可以全部js用一次就好
@@ -374,7 +392,8 @@ app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootSc
 
     }
 
-    $scope.switchCage = function (oldCageNo, newCageNo) {
+    
+    $scope.switchCage = function (oldCageNo, newCageNo) { // 選取的動物換籠子
 
 
         var selectedAnimals = filterFilter($scope.animals, {
@@ -411,9 +430,10 @@ app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootSc
             });
 
 
-    }
+    } // 選取的動物換籠子 end
 
-    $scope.isSelected = function () {
+
+    $scope.isSelected = function () { //判斷是否有打勾選擇
         if (typeof filterFilter($scope.animals, {
                 isSelected: true
             }, true) === "undefined") {
@@ -427,10 +447,10 @@ app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootSc
         } else {
             return false;
         }
-    }
+    } //判斷是否有打勾選擇 end
 
 
-    $scope.sourceIndex = function (keyName, key) {
+    $scope.sourceIndex = function (keyName, key) { 
 
         var ix = $scope.animals.getIndexBy(keyName, key);
         return ix;
@@ -462,7 +482,7 @@ app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootSc
     }
 
 
-    $scope.$on('updateCage', function (event, cage) {
+    $scope.$on('updateCage', function (event, cage) { //在籠子管理點下 '管理' 按鈕，調整IU、讀取籠內動物資料
 
         $rootScope.ui.animalInCage = true;
         $rootScope.ui.cage = false;
@@ -479,7 +499,7 @@ app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootSc
         });
     });
 
-    $scope.$on('loadAniamlInCage', function (event, cage) {
+    $scope.$on('loadAnimalInCage', function (event, cage) {
 
         $http.get('/api/animals?cageNo=' + cage.no).success(function (data) {
 
