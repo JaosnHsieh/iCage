@@ -332,7 +332,7 @@ app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootSc
         $http.get('/api/events?inOut=1')
             .success(function(data){
                 $scope.events = data;
-                console.log($scope.events);
+              
             })
             .error(function(err){
                 console.log(err);
@@ -519,6 +519,8 @@ app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootSc
     $scope.addAnimal = function () {
 
         $scope.animal.cageNo = $scope.cage.no;
+        $scope.animal.cageId = $scope.cage.idNo;
+
 
         $http({
                 method: 'POST',
@@ -529,6 +531,35 @@ app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootSc
                 }
             })
             .success(function (animal) {
+
+                
+                //新增原因紀錄
+                var animallog = {
+                    cageNo : animal.cageNo,
+                    animalId : animal.idNo,
+                    eventId : $scope.selectedEvent.idNo,
+                    eventName : $scope.selectedEvent.name,
+                    inOut: $scope.selectedEvent.inOut,
+                    memo:$scope.selectedEvent.memo
+                };
+                $http({
+                    method: 'POST',
+                    url: '/api/animallogs',
+                    data: animallog,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .success(function (animallog) {
+
+                });
+                //新增原因紀錄　end
+
+                // 刪除選擇好的 新增原因
+                $scope.selectedEventIdNo=null;
+                $scope.selectedEvent=null;
+                // 刪除選擇好的 新增原因 end
+
 
                 $http.get('/api/animals?cageNo=' + $scope.cage.no).success(function (data) {
 

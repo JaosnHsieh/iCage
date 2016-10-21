@@ -127,11 +127,11 @@ router.post('/animals', (req, res) => {
 
   animal.save()
     .then(function (data) {
-      res.status(200).send('animal inserted successfully');
+      res.status(200).send(data);
     })
     .catch(function (err) {
       console.log('err', err);
-      res.status(400).send('出事');
+      res.status(400).send('error');
     });
 
 });
@@ -175,6 +175,39 @@ router.delete('/animals', (req, res, next) => {
 });
 
 //// animal table end
+
+
+//// animallog table start
+
+router.post('/animallogs', (req, res) => {
+
+
+
+let data = req.body;
+let animallog = db.AnimalLog.build();
+
+animallog.cageNo = data.cageNo;
+animallog.animalId = data.animalId;
+animallog.eventId = data.eventId;
+animallog.eventName = data.eventName;
+animallog.inOut = data.inOut;
+animallog.memo = data.memo;
+
+animallog.updatedAt = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
+animallog.createdAt = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
+
+animallog.save()
+  .then(function (data) {
+    res.status(200).send(data);
+  })
+  .catch(function (err) {
+    console.log('err', err);
+    res.status(400).send('error');
+  });
+
+});
+
+//// animallog table end
 
 
 //// cage table start

@@ -444,12 +444,14 @@
                         <div class="row">
 
                             <div class="col-sm-6 form-group">
-                                <label for="">原因<strong class="text-danger"></strong></label>
+                                <label for="">原因<strong class="text-danger">*(必填)</strong></label>
                                 
                                  <select class="form-control"
                                     ng-model="selectedEventIdNo" 
                                     ng-options="e.idNo as e.name for e in events" 
-                                    ng-change="selectedEventMemo=(events|filter:{idNo:selectedEventIdNo})[0].memo">
+                                    ng-change="selectedEvent=selectedEventIdNo?(events|filter:{idNo:selectedEventIdNo})[0]:'';"
+                                     required>
+                                    <option value="">-----請選擇原因-----</option>
                                  </select>
 
                             </div>
@@ -458,7 +460,8 @@
 
                             <div class="col-sm-6 form-group">
                                 <label for="">原因備註說明<strong class="text-danger"></strong></label>
-                               <p>{[{selectedEventMemo}]}</p>
+                               <p>{[{selectedEvent.memo}]}</p>
+                               
 
                             </div>
 
@@ -580,14 +583,20 @@
                         <h4 class="modal-title" id="myModalLabel">編輯動物資料</h4>
                     </div>
 
-                    <div class="pull-right dropdown">
+                    <div class="row">
+                        <div class="col-xs-10"></div>
+                        <div class="col-xs-2">
+                               <div class="dropdown">
 
-                        <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">刪除
-                                                    </button>
-                        <ul class="dropdown-menu">
-                            <li class="btn btn-danger btn-block" ng-click="deleteAnimal(editAnimal)">是</li>
-                            <li class="btn btn-primary btn-block">否</li>
-                        </ul>
+                            <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">刪除
+                                                        </button>
+                            <ul class="dropdown-menu">
+                                <li class="btn btn-danger btn-block" ng-click="deleteAnimal(editAnimal)">是</li>
+                                <li class="btn btn-primary btn-block">否</li>
+                            </ul>
+                        </div>
+                        </div>
+                     
                     </div>
 
                     <form name="animalForm" ng-submit="submitUpdateAnimal()">

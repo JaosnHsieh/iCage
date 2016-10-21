@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    cageId: {
+    cageNo: {
       type: DataTypes.INTEGER,
       allowNull: true
     },
