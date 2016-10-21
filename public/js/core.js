@@ -326,12 +326,12 @@ app.controller('cageCtrl', function ($scope, $filter, $q, $http, $rootScope, fil
 //// AnimalInCage Controller Start
 app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootScope, filterFilter) {
 
-    //讀取資料
+    //進入cage頁面時 讀取資料
 
         //新增動物的原因
         $http.get('/api/events?inOut=1')
             .success(function(data){
-                $scope.events = data;
+                $scope.eventsAdd = data;
               
             })
             .error(function(err){
@@ -339,10 +339,21 @@ app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootSc
             }); 
         //新增動物的原因 end
 
+        //刪除動物的原因
+        $http.get('/api/events?inOut=-1')
+            .success(function(data){
+                $scope.eventsDelete = data;
+              
+            })
+            .error(function(err){
+                console.log(err);
+            }); 
+        //刪除動物的原因 end
 
 
 
-    //讀取資料 end
+
+    //進入cage頁面時 讀取資料 end
 
 
 
@@ -375,6 +386,53 @@ app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootSc
         }
         $q.all(qPromiseArr)
             .then(function (dataList) {
+
+                //刪除原因儲存 
+
+                var animallogs = [];
+
+                for (var i = 0; i < selectedAnimals.length; i++) {
+
+                    animallogs.push({
+
+                        cageNo: selectedAnimals[i].cageNo,
+                        animalId: selectedAnimals[i].idNo,
+                        eventId: $scope.selectedEventDelete.idNo,
+                        eventName: $scope.selectedEventDelete.name,
+                        inOut: $scope.selectedEventDelete.inOut,
+                        memo: $scope.selectedEventDelete.memo
+
+                    });
+
+
+                }
+
+
+                var qPromiseArrForLog = [];
+                    for (var i = 0; i < animallogs.length; i++) {
+
+                        qPromiseArrForLog.push($http({
+                            method: 'POST',
+                            url: '/api/animallogs',
+                            data: animallogs[i],
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        }));
+                    }
+
+                $q.all(qPromiseArrForLog)
+                    .then(function (dataList) {
+                        console.log('delete log saved!!');
+                    });
+
+                //刪除原因儲存　end
+
+                  // 刪除選擇的 新增原因
+                $scope.selectedEventDeleteIdNo=null;
+                $scope.selectedEventDelete=null;
+                // 刪除選擇的 新增原因 end
+
                 $scope.masterCheck = false;
                 $http.get('/api/animals?cageNo=' + oldCageNo).success(function (data) {
                         $scope.animals = data;
@@ -521,6 +579,7 @@ app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootSc
         $scope.animal.cageNo = $scope.cage.no;
         $scope.animal.cageId = $scope.cage.idNo;
 
+        
 
         $http({
                 method: 'POST',
@@ -533,14 +592,14 @@ app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootSc
             .success(function (animal) {
 
                 
-                //新增原因紀錄
+                //新增原因儲存
                 var animallog = {
                     cageNo : animal.cageNo,
                     animalId : animal.idNo,
-                    eventId : $scope.selectedEvent.idNo,
-                    eventName : $scope.selectedEvent.name,
-                    inOut: $scope.selectedEvent.inOut,
-                    memo:$scope.selectedEvent.memo
+                    eventId : $scope.selectedEventAdd.idNo,
+                    eventName : $scope.selectedEventAdd.name,
+                    inOut: $scope.selectedEventAdd.inOut,
+                    memo:$scope.selectedEventAdd.memo
                 };
                 $http({
                     method: 'POST',
@@ -553,12 +612,12 @@ app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootSc
                 .success(function (animallog) {
 
                 });
-                //新增原因紀錄　end
+                //新增原因儲存　end
 
-                // 刪除選擇好的 新增原因
-                $scope.selectedEventIdNo=null;
-                $scope.selectedEvent=null;
-                // 刪除選擇好的 新增原因 end
+                // 清空選擇的 新增原因
+                $scope.selectedEventAddIdNo=null;
+                $scope.selectedEventAdd=null;
+                // 清空選擇的 新增原因 end
 
 
                 $http.get('/api/animals?cageNo=' + $scope.cage.no).success(function (data) {
@@ -611,33 +670,39 @@ app.controller('animalInCageCtrl', function ($scope, $filter, $q, $http, $rootSc
 
     };
 
-    $scope.deleteAnimal = function (a) {
+    // $scope.deleteAnimal = function (a) {
 
 
 
-        $http({
-                method: 'DELETE',
-                url: '/api/animals',
-                data: a,
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .success(function (animal) {
-                $http.get('/api/animals?cageNo=' + $scope.cage.no).success(function (data) {
+    //     $http({
+    //             method: 'DELETE',
+    //             url: '/api/animals',
+    //             data: a,
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             }
+    //         })
+    //         .success(function (animal) {
+                
+    //             // 刪除選擇的 刪除原因
+    //             $scope.selectedEventDeleteIdNo=null;
+    //             $scope.selectedEventDelete=null;
+    //             // 刪除選擇的 刪除原因 end
 
-                    $scope.animals = data;
-                    $scope.editAnimal = null;
-                    $('#cageAnimalEdit').modal('hide');
-                    $http.get('/api/animals').success(function (data) {
-                        $rootScope.animalsForCounting = data;
-                    });
+    //             $http.get('/api/animals?cageNo=' + $scope.cage.no).success(function (data) {
 
-                });
+    //                 $scope.animals = data;
+    //                 $scope.editAnimal = null;
+    //                 $('#cageAnimalEdit').modal('hide');
+    //                 $http.get('/api/animals').success(function (data) {
+    //                     $rootScope.animalsForCounting = data;
+    //                 });
+
+    //             });
 
 
-            });
-    };
+    //         });
+    // };
 
 
 

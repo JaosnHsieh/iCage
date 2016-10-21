@@ -445,12 +445,9 @@
 
                             <div class="col-sm-6 form-group">
                                 <label for="">原因<strong class="text-danger">*(必填)</strong></label>
-                                
-                                 <select class="form-control"
-                                    ng-model="selectedEventIdNo" 
-                                    ng-options="e.idNo as e.name for e in events" 
-                                    ng-change="selectedEvent=selectedEventIdNo?(events|filter:{idNo:selectedEventIdNo})[0]:'';"
-                                     required>
+
+                                <select class="form-control" ng-model="selectedEventAddIdNo" ng-options="e.idNo as e.name for e in eventsAdd" ng-change="selectedEventAdd=selectedEventAddIdNo?(eventsAdd|filter:{idNo:selectedEventAddIdNo})[0]:'';"
+                                    required>
                                     <option value="">-----請選擇原因-----</option>
                                  </select>
 
@@ -460,8 +457,8 @@
 
                             <div class="col-sm-6 form-group">
                                 <label for="">原因備註說明<strong class="text-danger"></strong></label>
-                               <p>{[{selectedEvent.memo}]}</p>
-                               
+                                <p>{[{selectedEventAdd.memo}]}</p>
+
 
                             </div>
 
@@ -586,17 +583,17 @@
                     <div class="row">
                         <div class="col-xs-10"></div>
                         <div class="col-xs-2">
-                               <div class="dropdown">
+                            <div class="dropdown">
 
-                            <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">刪除
-                                                        </button>
-                            <ul class="dropdown-menu">
-                                <li class="btn btn-danger btn-block" ng-click="deleteAnimal(editAnimal)">是</li>
-                                <li class="btn btn-primary btn-block">否</li>
-                            </ul>
+                                <!--<button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">刪除-->
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li class="btn btn-danger btn-block" ng-click="deleteAnimal(editAnimal)">是</li>
+                                    <li class="btn btn-primary btn-block">否</li>
+                                </ul>
+                            </div>
                         </div>
-                        </div>
-                     
+
                     </div>
 
                     <form name="animalForm" ng-submit="submitUpdateAnimal()">
@@ -747,27 +744,39 @@
 
                 <div class="modal-content">
 
-                    <div class="modal-header">
+                    <form name="cageFormUpdate" ng-submit="deleteSelectedAnimalsInCage(cage.no)">
 
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <div class="modal-header">
 
-                        <h3 class="alert alert-danger">確定刪除?</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-                    </div>
+                            <select class="form-control" ng-model="selectedEventDeleteIdNo" ng-options="e.idNo as e.name for e in eventsDelete" ng-change="selectedEventDelete=selectedEventDeleteIdNo?(eventsDelete|filter:{idNo:selectedEventDeleteIdNo})[0]:'';"
+                                required>
+                                    <option value="">-----請選擇原因-----</option>
+                            </select>
+
+                            <h3 class="alert alert-danger">確定刪除?</h3>
+
+                            
 
 
-                    <div class="row form-group">
 
-                        <div class="col-sm-5">
-                            <button class="btn-block btn-default btn-lg" data-dismiss="modal">取消</button>
                         </div>
-                        <div class="col-sm-2"></div>
 
-                        <div class="col-sm-5">
-                            <button class="btn-block btn-primary btn-lg" ng-click="deleteSelectedAnimalsInCage(cage.no)">確定</button>
+
+                        <div class="row form-group">
+
+                            <div class="col-sm-5">
+                                <button class="btn-block btn-default btn-lg" data-dismiss="modal">取消</button>
+                            </div>
+                            <div class="col-sm-2"></div>
+
+                            <div class="col-sm-5">
+                                <!--<button class="btn-block btn-primary btn-lg" ng-click="deleteSelectedAnimalsInCage(cage.no)">確定</button>-->
+                                <button class="btn-block btn-primary btn-lg" type="submit">確定</button>
+                            </div>
+
                         </div>
-
-                    </div>
 
 
 
