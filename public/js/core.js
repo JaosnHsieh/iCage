@@ -177,15 +177,22 @@ app.controller('cageCtrl', function ($scope, $filter, $q, $http, $rootScope, fil
     // }
 
     $scope.checkCageNo = function (typingCageNo) { //檢查有沒有重複的cageNo
+
+       //這個if判斷是為了檢查 修改籠子 如果是正在修改的籠子的號碼 不要算重複
+            if($scope.cageNoForCheckingUpdate&&$scope.cageNoForCheckingUpdate==typingCageNo){  
+                return false;
+            }
+        //這個if判斷是為了檢查 修改籠子 如果是正在修改的籠子的號碼 不要算重複 end
+
         if (typeof typingCageNo === "undefined") {
             return;
         }
         if ($scope.cages && filterFilter($scope.cages, {
                 no: typingCageNo
             }, true).length > 0) {
-            return true;
+            return true; //有重複
         } else {
-            return false;
+            return false; //沒重複
         }
 
     }
@@ -247,8 +254,12 @@ app.controller('cageCtrl', function ($scope, $filter, $q, $http, $rootScope, fil
 
     $scope.updateCage = function (c) {
         $scope.$broadcast('loadAnimalInCage', c);
-        $scope.editCage = c;
+        $scope.editCage = angular.copy(c);
         $('#cageEdit').modal('show');
+
+        $scope.cageNoForCheckingUpdate = $scope.editCage.no; //按下修改後馬上暫存的籠子編號 為了使用者輸入時檢查 是否有 重複編號 用的
+
+
     };
 
     $scope.toggleAnimalInCage = function (c) {
