@@ -114,66 +114,67 @@
                     </div>
 
 
+                    <div class="modal-body">
+
+                        <form name="cageForm" ng-submit="addCage()">
 
 
-                    <form name="cageForm" ng-submit="addCage()">
+                            <div class="row">
+                                <div class="col-sm-6 form-group">
+                                    <label for="">籠號<strong class="text-danger">*(必填)</strong></label>
+                                    <input class="form-control" name="cageNo" type="text" ng-model="cage.no" autocomplete="off" required />
+                                    <span class="btn-danger" ng-show="checkCageNo(cage.no)">籠號重複 請換別的號碼</span>
+                                    <!--<span class="help-inline" ng-show="cageForm.cageNo.$error.required && cageForm.cageNo.$touched">Required</span>-->
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label for="">客戶ID<strong class="text-danger"></strong></label>
 
 
-                        <div class="row">
-                            <div class="col-sm-6 form-group">
-                                <label for="">籠號<strong class="text-danger">*(必填)</strong></label>
-                                <input class="form-control" name="cageNo" type="text" ng-model="cage.no" autocomplete="off" required />
-                                <span class="btn-danger" ng-show="checkCageNo(cage.no)">籠號重複 請換別的號碼</span>
-                                <!--<span class="help-inline" ng-show="cageForm.cageNo.$error.required && cageForm.cageNo.$touched">Required</span>-->
+                                    <input class="form-control" type="text" ng-model="cage.customerId">
+                                </div>
+
                             </div>
-                            <div class="col-sm-6 form-group">
-                                <label for="">客戶ID<strong class="text-danger"></strong></label>
 
-
-                                <input class="form-control" type="text" ng-model="cage.customerId">
+                            <div class="row">
+                                <div class="col-sm-6 form-group">
+                                    <label for="">識別碼(QR CODE)<strong class="text-danger"></strong></label>
+                                    <input class="form-control" type="text" ng-model="cage.qrCodeId">
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label for="">位置<strong class="text-danger"></strong></label>
+                                    <input class="form-control" type="text" ng-model="cage.position">
+                                </div>
                             </div>
 
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-6 form-group">
-                                <label for="">識別碼(QR CODE)<strong class="text-danger"></strong></label>
-                                <input class="form-control" type="text" ng-model="cage.qrCodeId">
+                            <div class="row">
+                                <div class="col-sm-6 form-group">
+                                    <label for="">狀態<strong class="text-danger"></strong></label>
+                                    <input class="form-control" type="text" ng-model="cage.status">
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label for="">感應器ip<strong class="text-danger"></strong></label>
+                                    <input class="form-control" pattern="^((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))*$"
+                                        type="text" ng-model="cage.ip">
+                                </div>
                             </div>
-                            <div class="col-sm-6 form-group">
-                                <label for="">位置<strong class="text-danger"></strong></label>
-                                <input class="form-control" type="text" ng-model="cage.position">
+
+                            <div class="row">
+                                <div class="col-sm-6 form-group">
+                                    <label for="">備註<strong class="text-danger"></strong></label>
+                                    <input class="form-control" type="text" ng-model="cage.memo">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-sm-6 form-group">
-                                <label for="">狀態<strong class="text-danger"></strong></label>
-                                <input class="form-control" type="text" ng-model="cage.status">
+
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <button class="btn-block btn-lg btn-primary" type="submit" ng-disabled="checkCageNo(cage.no)">送出</button>
+                                </div>
                             </div>
-                            <div class="col-sm-6 form-group">
-                                <label for="">感應器ip<strong class="text-danger"></strong></label>
-                                <input class="form-control" pattern="^((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))*$"
-                                    type="text" ng-model="cage.ip">
-                            </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-sm-6 form-group">
-                                <label for="">備註<strong class="text-danger"></strong></label>
-                                <input class="form-control" type="text" ng-model="cage.memo">
-                            </div>
-                        </div>
+                        </form>
 
-
-                        <div class="form-group row">
-                            <div class="col-sm-12">
-                                <button class="btn-block btn-lg btn-primary" type="submit" ng-disabled="checkCageNo(cage.no)">送出</button>
-                            </div>
-                        </div>
-
-                    </form>
-
+                    </div>
 
                 </div>
             </div>
