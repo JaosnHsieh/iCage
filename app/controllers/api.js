@@ -1,5 +1,5 @@
 'use strict'
-let express = require('express'),
+const express = require('express'),
   router = express.Router(),
   db = require('../models'),
   moment = require('moment'),
@@ -473,14 +473,66 @@ router.get('/users', function (req, res) {
 });
 
 
-var vibrateData = {
+// 感應器 start
+
+let tempData = {};
+let vibrateData = {
   v: [],
   t: []
 };
-// 收感應器的資料
-router.post('/vibrate', function (req, res) {
 
+router.get('/sensor',function(req,res){
+      res.json(tempData[req.query.ip]);
+});
+
+router.post('/sensor/food',function(req,res){
+    
+    let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    ip = ip.replace(/^.*:/, '');
+    
+    if(typeof tempData[ip] == 'undefined'){
+          tempData[ip] = {};
+    }
+
+    else{
+          tempData[ip]['food']= req.body;
+    }
+
+});
+
+router.post('/sensor/water',function(req,res){
+        
+    let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    ip = ip.replace(/^.*:/, '');
+    
+    if(typeof tempData[ip] == 'undefined'){
+          tempData[ip] = {};
+    }
+
+    else{
+          tempData[ip]['water']= req.body;
+    }
+
+});
+
+router.post('/sensor/vibrate', function (req, res) {
+
+
+    let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    ip = ip.replace(/^.*:/, '');
+
+
+    if(typeof tempData[ip] == 'undefined'){
+          tempData[ip] = {};
+    }
+
+    else{
+          tempData[ip]['vibrate']= req.body;
+    }
+
+  // 用lodash把資料加起來
   _.mergeWith(vibrateData, req.body, customizer);
+
   if (vibrateData.t.length >= 100) {
 
     let vibrate = db.Vibrate.build();
@@ -517,8 +569,10 @@ router.post('/vibrate', function (req, res) {
 
 });
 
+//感應器 end
 
 router.all('/*',function(req,res){
   res.status(500).send('error');
   
 });
+

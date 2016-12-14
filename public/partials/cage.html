@@ -339,7 +339,15 @@
                     <li class="btn btn-warning btn-block" ng-click="turnOffCam(cage)">關閉</li>
                 </ul>
             </div>
-            <div class="col-sm-3"></div>
+
+            <div class="col-sm-3">
+                
+                <!--<button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#realtimeData">-->
+                <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" ng-click="realtimeDataBtn()">
+                    即時資料
+                </button>
+
+            </div>
         </div>
 
 
@@ -795,7 +803,48 @@
         </div>
         <!-- deleteAnimalsModal end-->
 
+         <!--realtimedata  modal  start-->
+        <div class="modal fade" id="realtimeData">
 
+            <div class="modal-dialog modal-lg" role="document">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h4>籠號: {[{cage.no}]}</h4>
+                        <h4 class="modal-title">感應器 - 即時資料(每秒更新)</h4>
+                    </div>
+
+                    
+                    <div class="row">
+
+                        <div class="col-sm-12">
+                            <h1>飲水 </h1>
+                            <pre>
+                                {[{sensor.water}]}
+                            </pre>
+                        </div>
+                        <div class="col-sm-12">
+                              <h1>飲水 </h1>
+                            <pre>
+                                {[{sensor.food}]}
+                            </pre>
+                        </div>
+                        <div class="col-sm-12">
+                            <h1>震動</h1>
+                           <pre> {[{sensor.vibrate|json}]}</pre>
+                        </div>
+
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+        <!--realtimedata  modal  end-->
 
 
 
