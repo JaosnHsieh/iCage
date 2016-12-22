@@ -61,7 +61,7 @@ router.post('/signup', function (req, res) {
             console.log('err', err);
           });
       } else {
-        res.send('此帳號已經有人使用囉!!')
+        res.sendStatus(403);
       }
     })
     .catch((err) => {

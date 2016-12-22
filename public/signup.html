@@ -1,51 +1,658 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>iCage註冊</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <meta charset="UTF-8">
+  <title>iCage註冊</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.twzipcode.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
 <body>
-    <div class="container">
-        <center><h1>iCage註冊</h1></center>
-            <form class="form-horizontal" action="/api/signup" method="POST">
-
-                <div class="form-group">
-                    <label class="control-label col-sm-4" for="username">帳號:</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="username" id="username" placeholder="輸入帳號">
-                    </div>
+  <div class="container container-narrow">
+    <h1>iCage客戶帳號申請</h1>
+    <ul class="iCage_setpBox">
+      <li class="active step1">
+        <span class="wrp">
+                 服務條款
+        <span class="arr"></span>
+        </span>
+      </li>
+      <li class="step2">
+        <span class="wrp">
+                 基本資料填寫
+        <span class="arr"></span>
+        </span>
+      </li>
+      <li class="step3">
+        <span class="wrp">
+                 建立帳號
+        <span class="arr"></span>
+        </span>
+      </li>
+    </ul>
+    <div id="step1" class="step">
+      <div class="box">
+        <table id="table2" cellpadding="5" cellspacing="0" class="form_tb" width="100%">
+          <tbody>
+            <tr>
+              <td>
+                <div class="Section1" style="layout-grid: 19.05pt">
+                  <h2 align="center" style="text-align: center; text-indent: 0cm; margin: 9.5pt 0cm">
+                    <span lang="X-NONE" style="font-size: 16.0pt; font-family: 標楷體">iCage</span><span style="font-size: 16.0pt; font-family: 標楷體">客戶</span>
+                    <span
+                      lang="X-NONE" style="font-size: 16.0pt;
+                                                font-family: 標楷體">個人資料蒐集</span><span style="font-size: 16.0pt; font-family: 標楷體">同意書</span></h2>
+                  <p class="MsoNormal" style="line-height: normal; layout-grid-mode: char; margin-left: 14.0pt">
+                    <span style="font-size: 12.0pt; font-family: 標楷體">本同意書係依據個人資料保護法第八條之規定，於蒐集您的個人資料時進行法定告知義務。</span></p>
+                  <p class="a" style="text-indent: -20.45pt; line-height: normal; layout-grid-mode: char;
+                                        margin-left: 35.45pt">
+                    <span lang="EN-US" style="font-size: 12.0pt; font-family: 標楷體">一、</span><span style="font-size: 12.0pt;
+                                            font-family: 標楷體">蒐集單位名稱<span lang="EN-US">: </span>
+                    <u><span style="color: red">亞璿資訊有限公司<span lang="EN-US">(</span>以下簡稱本公司<span lang="EN-US">)</span></span>
+                    </u>
+                    </span>
+                  </p>
+                  <p class="a" style="text-indent: -20.45pt; line-height: normal; layout-grid-mode: char;
+                                        margin-left: 35.45pt">
+                    <span lang="EN-US" style="font-size: 12.0pt; font-family: 標楷體">二、</span><span style="font-size: 12.0pt;
+                                            font-family: 標楷體">蒐集目的<span lang="EN-US">:</span>
+                    <u><span style="color: red">本公司蒐集您個人資料的目的在於進行各項實驗動物資源服務、教育訓練服務、內部各項統計調查與分析與本公司依法設立之法定義務作業使用。</span></u>
+                    </span>
+                  </p>
+                  <p class="a" style="text-indent: -20.45pt; line-height: normal; layout-grid-mode: char;
+                                        margin-left: 35.45pt">
+                    <span lang="EN-US" style="font-size: 12.0pt; font-family: 標楷體">三、</span><span style="font-size: 12.0pt;
+                                            font-family: 標楷體">本人同意本人的個人資料用於下列用途</span>
+                  </p>
                 </div>
-
-                <div class="form-group">
-                    <label class="control-label col-sm-4" for="pwd">密碼:</label>
-                    <div class="col-sm-4" >
-                        <input type="password" class="form-control" name="pwd" id="pwd" placeholder="輸入密碼"  value="">
-                    </div>
+                <div class="Section2" style="layout-grid: 19.05pt">
+                  <p class="MsoNormal" style="text-indent: -24.0pt; line-height: 80%; layout-grid-mode: char;
+                                        margin-left: 59.4pt">
+                    <span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: Wingdings;
+                                            color: blue">l<span style="font: 7.0pt &quot; times new roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </span></span><span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                color: blue">001 </span><span style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                    color: blue">人身保險。<span lang="EN-US">(</span>僅限於實習生<span lang="EN-US">)</span></span>
+                  </p>
+                  <p class="MsoNormal" style="text-indent: -24.0pt; line-height: 80%; layout-grid-mode: char;
+                                        margin-left: 59.4pt">
+                    <span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: Wingdings;
+                                            color: blue">l<span style="font: 7.0pt &quot; times new roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </span></span><span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                color: blue">036 </span><span style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                    color: blue">存款與匯款。<span lang="EN-US">(</span>僅限退費用<span lang="EN-US">)</span></span>
+                  </p>
+                  <p class="MsoNormal" style="text-indent: -24.0pt; line-height: 80%; layout-grid-mode: char;
+                                        margin-left: 59.4pt">
+                    <span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: Wingdings;
+                                            color: blue">l<span style="font: 7.0pt &quot; times new roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </span></span><span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                color: blue">075 </span><span style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                    color: blue">科技行政。</span></p>
+                  <p class="MsoNormal" style="text-indent: -24.0pt; line-height: 80%; layout-grid-mode: char;
+                                        margin-left: 59.4pt">
+                    <span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: Wingdings;
+                                            color: blue">l<span style="font: 7.0pt &quot; times new roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </span></span><span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                color: blue">090 </span><span style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                    color: blue">消費者、客戶管理與服務。</span></p>
+                  <p class="MsoNormal" style="text-indent: -24.0pt; line-height: 80%; layout-grid-mode: char;
+                                        margin-left: 59.4pt">
+                    <span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: Wingdings;
+                                            color: blue">l<span style="font: 7.0pt &quot; times new roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </span></span><span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                color: blue">091 </span><span style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                    color: blue">消費者保護。</span></p>
+                  <p class="MsoNormal" style="text-indent: -24.0pt; line-height: 80%; layout-grid-mode: char;
+                                        margin-left: 59.4pt">
+                    <span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: Wingdings;
+                                            color: blue">l<span style="font: 7.0pt &quot; times new roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </span></span><span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                color: blue">109 </span><span style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                    color: blue">教育或訓練行政。</span></p>
+                  <p class="MsoNormal" style="text-indent: -24.0pt; line-height: 80%; layout-grid-mode: char;
+                                        margin-left: 59.4pt">
+                    <span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: Wingdings;
+                                            color: blue">l<span style="font: 7.0pt &quot; times new roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </span></span><span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                color: blue">157 </span><span style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                    color: blue">調查、統計與研究分析。</span></p>
+                  <p class="MsoNormal" style="text-indent: -24.0pt; line-height: 80%; layout-grid-mode: char;
+                                        margin-left: 59.4pt">
+                    <span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: Wingdings;
+                                            color: blue">l<span style="font: 7.0pt &quot; times new roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </span></span><span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                color: blue">129 </span><span style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                    color: blue">會計與相關服務。</span></p>
+                  <p class="MsoNormal" style="text-indent: -24.0pt; line-height: 80%; layout-grid-mode: char;
+                                        margin-left: 59.4pt">
+                    <span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: Wingdings;
+                                            color: blue">l<span style="font: 7.0pt &quot; times new roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </span></span><span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                color: blue">136 </span><span style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                    color: blue">資<span lang="EN-US">(</span>通<span lang="EN-US">)</span>訊與資料庫管理。</span>
+                  </p>
+                  <p class="MsoNormal" style="text-indent: -24.0pt; line-height: 80%; layout-grid-mode: char;
+                                        margin-left: 59.4pt">
+                    <span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: Wingdings;
+                                            color: blue">l<span style="font: 7.0pt &quot; times new roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </span></span><span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                color: blue">150 </span><span style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                    color: blue">輔助性與後勤支援管理。</span></p>
+                  <p class="MsoNormal" style="text-indent: -24.0pt; line-height: 80%; layout-grid-mode: char;
+                                        margin-left: 59.4pt">
+                    <span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: Wingdings;
+                                            color: blue">l<span style="font: 7.0pt &quot; times new roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </span></span><span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                color: blue">181 </span><span style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                    color: blue">其他經營合於營業登記項目或組織章程所定之業務。</span>
+                  </p>
                 </div>
+                <div class="Section3" style="layout-grid: 19.05pt">
+                  <p class="a" style="text-indent: -20.45pt; line-height: normal; layout-grid-mode: char;
+                                        margin-left: 35.45pt">
+                    <span lang="EN-US" style="font-size: 12.0pt; font-family: 標楷體">四、</span><span style="font-size: 12.0pt;
+                                            font-family: 標楷體">本人<u>同意</u>本人的個人資料用於下列用途：</span></p>
+                  <p class="MsoNormal" style="line-height: 80%; layout-grid-mode: char; margin-left: 35.4pt">
+                    <input id="SampleContent_cb040" type="checkbox" name="ctl00$SampleContent$cb040" checked="checked">
+                    <b><span style="font-size: 12.0pt; line-height: 80%; font-family: Batang">&nbsp;</span><span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體">040 </span>
+                                            <span style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體">行銷。<span lang="EN-US" style="color: #00B050">(</span><span style="color: #00B050">只寄<span lang="EN-US">DM</span>或告知新服務項目<span lang="EN-US">)</span></span></span></b>
+                    <span
+                      lang="EN-US" style="font-size: 12.0pt;
+                                                        line-height: 80%; font-family: 標楷體"> </span>
+                  </p>
+                  <p class="a" style="margin-left: 35.45pt; line-height: normal; layout-grid-mode: char">
+                    <input id="SampleContent_cb098" type="checkbox" name="ctl00$SampleContent$cb098" checked="checked">
+                    <b><span lang="EN-US" style="font-size: 12.0pt; font-family: 標楷體">&nbsp;098 </span><span style="font-size: 12.0pt; font-family: 標楷體">商業與技術資訊。<span lang="EN-US" style="color: #00B050">(</span><span style="color: #00B050">電子報<span lang="EN-US">)</span></span></span></b>
+                    <span
+                      lang="EN-US" style="font-size: 12.0pt; font-family: 標楷體; color: #00B0F0">
+                      </span>
+                  </p>
+                  <p class="a" style="margin-left: 35.45pt; line-height: normal; layout-grid-mode: char">
+                    <input id="SampleContent_cb182" type="checkbox" name="ctl00$SampleContent$cb182" checked="checked">
+                    <b><span lang="EN-US" style="font-size: 12.0pt; font-family: 標楷體">&nbsp;182 其他諮詢服務</span><span style="font-size: 12.0pt; font-family: 標楷體">。<span lang="EN-US" style="color: #00B050">(</span><span lang="EN-US" style="color: #00B050">滿意度調查)</span></span></b>
+                    <span
+                      lang="EN-US" style="font-size: 12.0pt; font-family: 標楷體; color: #00B0F0">
+                      </span>
+                  </p>
+                  <p class="a" style="text-indent: -20.45pt; line-height: normal; layout-grid-mode: char;
+                                        margin-left: 35.45pt">
+                    <span lang="EN-US" style="font-size: 12.0pt; font-family: 標楷體">五、</span><span style="font-size: 12.0pt;
+                                            font-family: 標楷體">蒐集個人資料類別<span lang="EN-US">: </span></span>
+                  </p>
+                  <p class="a" style="margin-left: 35.45pt; line-height: normal; layout-grid-mode: char">
+                    <span style="font-size: 12.0pt; font-family: 標楷體">蒐集個人資料類別屬於法務部定義個人資料保護法蒐集類別，均依主管機關公佈之內容辦理，主要是客戶連絡與客服交易審核等資料<span lang="EN-US">(</span>均詳列於本公司對外服務平台之各項服務訂購或報名系統內
+                    <span
+                      lang="EN-US">)</span>，本同意書蒐集以下類別：</span>
+                  </p>
+                </div>
+                <div class="Section4" style="layout-grid: 19.05pt">
+                  <p class="MsoNormal" style="text-indent: -24.0pt; line-height: 80%; layout-grid-mode: char;
+                                        margin-left: 59.4pt">
+                    <span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: Wingdings;
+                                            color: blue">l<span style="font: 7.0pt &quot; times new roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </span></span><span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                color: blue">C001/</span><span style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                    color: blue">辨識個人者。</span></p>
+                  <p class="MsoNormal" style="text-indent: -24.0pt; line-height: 80%; layout-grid-mode: char;
+                                        margin-left: 59.4pt">
+                    <span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: Wingdings;
+                                            color: blue">l<span style="font: 7.0pt &quot; times new roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </span></span><span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                color: blue">C013/</span><span style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                    color: blue">習慣。<span lang="EN-US">(</span>飲食習慣<span lang="EN-US">)</span></span>
+                  </p>
+                  <p class="MsoNormal" style="text-indent: -24.0pt; line-height: 80%; layout-grid-mode: char;
+                                        margin-left: 59.4pt">
+                    <span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: Wingdings;
+                                            color: blue">l<span style="font: 7.0pt &quot; times new roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </span></span><span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                color: blue">C038/</span><span style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                    color: blue">職業。</span></p>
+                  <p class="MsoNormal" style="text-indent: -24.0pt; line-height: 80%; layout-grid-mode: char;
+                                        margin-left: 59.4pt">
+                    <span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: Wingdings;
+                                            color: blue">l<span style="font: 7.0pt &quot; times new roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </span></span><span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                color: blue">C052/</span><span style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                    color: blue">資格或技術。<span lang="EN-US">(</span>接受本公司服務或優惠之資格<span lang="EN-US">)</span></span>
+                  </p>
+                  <p class="MsoNormal" style="text-indent: -24.0pt; line-height: 80%; layout-grid-mode: char;
+                                        margin-left: 59.4pt">
+                    <span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: Wingdings;
+                                            color: blue">l<span style="font: 7.0pt &quot; times new roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </span></span><span lang="EN-US" style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                color: blue">C102/</span><span style="font-size: 12.0pt; line-height: 80%; font-family: 標楷體;
+                                                    color: blue">約定或契約。<span lang="EN-US">(</span>與接受本公司服務必要之契約<span lang="EN-US">)</span></span>
+                  </p>
+                </div>
+                <p class="a" style="text-indent: -21.25pt; line-height: normal; layout-grid-mode: char;
+                                    margin-left: 35.45pt">
+                  <span lang="EN-US" style="font-size: 12.0pt; font-family: 標楷體">六、</span><span style="font-size: 12.0pt;
+                                        font-family: 標楷體">使用期間、地區、對象及方式</span></p>
+                <p class="a" style="text-indent: -21.3pt; line-height: normal; layout-grid-mode: char;
+                                    margin-left: 49.65pt">
+                  <span lang="EN-US" style="font-size: 12.0pt; font-family: 標楷體">(一)</span><span style="font-size: 12.0pt;
+                                        font-family: 標楷體">個人資料之利用期間為本公司或業務之存續期間，利用地區不限。</span></p>
+                <p class="a" style="text-indent: -21.3pt; line-height: normal; layout-grid-mode: char;
+                                    margin-left: 49.65pt">
+                  <span lang="EN-US" style="font-size: 12.0pt; font-family: 標楷體">(二)</span><span style="font-size: 12.0pt;
+                                        font-family: 標楷體">利用方式及對象<span lang="EN-US">:</span></span>
+                </p>
+                <p class="a" style="text-indent: -14.15pt; line-height: normal; layout-grid-mode: char;
+                                    margin-left: 63.8pt">
+                  <span lang="EN-US" style="font-size: 12.0pt; font-family: 標楷體; color: black">1.</span><span style="font-size: 12.0pt; font-family: 標楷體; color: black">利用於本公司於蒐集之目的宣告之各項業務執行，包括因業務執行所必須進行之各項聯繫及通知。</span></p>
+                <p class="a" style="text-indent: -14.15pt; line-height: normal; layout-grid-mode: char;
+                                    margin-left: 63.8pt">
+                  <span lang="EN-US" style="font-size: 12.0pt; font-family: 標楷體; color: black">2.</span><span style="font-size: 12.0pt; font-family: 標楷體; color: black">利用於政府機關、目的事業主管機關依其法定職掌請求提供時。</span></p>
+                <p class="a" style="text-indent: -20.45pt; line-height: normal; layout-grid-mode: char;
+                                    margin-left: 35.45pt">
+                  <span lang="EN-US" style="font-size: 12.0pt; font-family: 標楷體">七、</span><span style="font-size: 12.0pt;
+                                        font-family: 標楷體">個人資料之權利及權益</span></p>
+                <p class="a" style="text-indent: -21.3pt; line-height: normal; layout-grid-mode: char;
+                                    margin-left: 49.65pt">
+                  <span lang="EN-US" style="font-size: 12.0pt; font-family: 標楷體">(一)</span><span style="font-size: 12.0pt;
+                                        font-family: 標楷體">您得依法請求行使個人資料保護法第三條所規範之個人權利，包含：</span></p>
+                <p class="a" style="line-height: normal; layout-grid-mode: char; margin-left: 49.65pt">
+                  <span lang="X-NONE" style="font-size: 12.0pt; font-family: 標楷體">1.查詢或請求閱覽。2.請求製給複製本。3.請求補充或更正。4.請求停止蒐集、處理或利用。5.請求刪除。</span></p>
+                <p class="a" style="text-indent: -21.3pt; line-height: normal; layout-grid-mode: char;
+                                    margin-left: 49.65pt">
+                  <span lang="EN-US" style="font-size: 12.0pt; font-family: 標楷體">(二)</span><span style="font-size: 12.0pt;
+                                        font-family: 標楷體">請求進行之方式，應由當事人以正式書面來函，詳細寫明所欲行使之權利種類、內容以及當事人連絡資訊，未具備上述要件者，為尚未完成請求之程序，本公司得通知當事人補件，並於完成補件後，始完成請求程序，並開始起算辦理期間，以避免因資料不備而不慎或不當損害當事人權利。</span></p>
+                <p class="a" style="text-indent: -21.3pt; line-height: normal; layout-grid-mode: char;
+                                    margin-left: 49.65pt">
+                  <span lang="EN-US" style="font-size: 12.0pt; font-family: 標楷體">(三)</span><span style="font-size: 12.0pt;
+                                        font-family: 標楷體">前述個資權利之行使方式及細節，請電洽或以電子郵件發送需求至本公司服務人員<span style="color: red">張華志先生</span>，電話
+                  <span
+                    lang="EN-US">: <span style="color: red">02-27895518</span></span>，電子郵件<span lang="EN-US">:</span></span><span lang="EN-US"
+                      style="font-size: 12.0pt; color: red">hcc@nlac.narl.org.tw</span><span style="font-size: 12.0pt; font-family: 標楷體">。</span></p>
+                <p class="a" align="left" style="text-align: left; text-indent: -21.25pt; line-height: normal;
+                                    layout-grid-mode: char; margin-left: 35.45pt">
+                  <span lang="EN-US" style="font-size: 12.0pt; font-family: 標楷體">八、</span><span style="font-size: 12.0pt;
+                                        font-family: 標楷體">本公司於蒐集您的個人資料時，如有欄位標示為選擇性填寫，當您選擇不提供該個人資料時將不造成任何之權利影響。</span></p>
+                <div style="mso-element: para-border-div; border: none; border-bottom: solid windowtext 1.0pt;
+                                    mso-border-bottom-alt: solid windowtext .75pt; padding: 0cm 0cm 1.0pt 0cm; margin-left: 14.2pt;
+                                    margin-right: 0cm">
+                  <p class="a" align="left" style="text-align: left; text-indent: -21.25pt; line-height: normal;
+                                        layout-grid-mode: char; border: medium none; margin-left: 21.25pt; padding: 0cm">
+                    <span lang="EN-US" style="font-size: 12.0pt; font-family: 標楷體">九、</span><span style="font-size: 12.0pt;
+                                            font-family: 標楷體">本公司保有修訂本同意書之權利，本公司於修正本同意書內容後將且透過您所提供之的聯絡方式通知您，如您未提出異議，表示您已同意本公司所更改之內容。</span>
+                  </p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-5 col-sm-4">
+          <button class="btn btn-primary btn-lg text-center" onclick="nextTab(event,'step2');">下一步</button>
+        </div>
+      </div>
+    </div>
+    <div id="step2" class="step" style="display:none">
+      <form id="step2Form" class="form-horizontal" method="POST">
+      <div class="box2">
+        <div class="form-group">
+          <label class="control-label col-sm-4" for=""><span class="must">*</span>客戶名稱:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" name="" placeholder="" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4" for=""><span class="must">*</span>單位名稱:</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" name="" placeholder="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4" for=""><span class="must">*</span>部門名稱:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" name="" placeholder="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4" for=""><span class="must">*</span>職稱:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" name="" placeholder="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4" for=""><span class="must">*</span>單位地址:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" name="" placeholder="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4" for=""><span class="must">*</span>單位分類:</label>
+          <div class="col-sm-4">
+            <label class="radio-inline">
+      <input type="radio" name="optradio">學校
+    </label>
+            <label class="radio-inline">
+      <input type="radio" name="optradio">醫院
+    </label>
+            <label class="radio-inline">
+      <input type="radio" name="optradio">研究機構
+    </label>
+            <label class="radio-inline">
+      <input type="radio" name="optradio">生技公司
+      </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4" for=""><span class="must">*</span>電話:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" name="" placeholder="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4" for=""><span class="must">*</span>手機:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" name="" placeholder="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4" for=""><span class="must">*</span>傳真:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" name="" placeholder="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4" for=""><span class="must">*</span>電子信箱:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" name="" placeholder="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4" for=""><span class="must">*</span>統編或抬頭查詢:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" name="" placeholder="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4" for=""><span class="must">*</span>發票抬頭:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" name="" placeholder="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4" for=""><span class="must">*</span>統一編號:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" name="" placeholder="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4" for=""><span class="must">*</span>發票收件人:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" name="" placeholder="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4" for=""><span class="must">*</span>郵寄發票單位:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" name="" placeholder="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4" for=""><span class="must">*</span>部門:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" name="" placeholder="" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4" for=""><span class="must">*</span>郵寄發票地址:</label>
+          <div class="col-sm-6">
+            <div id="twzipcode">
+              <div class="county" data-role="county" data-style="form-control" data-value=""></div>
+              <div class="county" data-role="district" data-style="form-control" data-value=""></div>
+              <div class="county" data-role="zipcode" data-style="form-control" data-value=""></div>
+              <input type="text" class="form-control" name="" placeholder="">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-4" for=""><span class="must">*</span>備註:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" name="" placeholder="">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-5 col-sm-4">
+          <button class="btn btn-primary btn-lg" onclick="nextTab(event,'step1');">上一步</button>
+          <button class="btn btn-primary btn-lg" onclick="nextTab(event,'step3');">下一步</button>
+        </div>
+      </div>
+            <input style="display:none;" type="submit" value="submit" />
+
+    </form></div>
+    <div id="step3" class="step" style="display:none">
+      <div class="box2">
+        <form id="step3Form" class="form-horizontal" action="/api/signup" method="POST">
+          <div class="form-group">
+            <label class="control-label col-sm-4" for="username"><span class="must">*</span>帳號:</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="username" id="username" placeholder="" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-4" for="pwd"><span class="must">*</span>密碼:</label>
+            <div class="col-sm-4">
+              <input type="password" class="form-control" name="pwd" id="pwd" placeholder="" value="" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-4" for="username"><span class="must">*</span>名字</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="name" id="name" placeholder="" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-4" for="username">備註</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="memo" id="memo" placeholder="輸入備註">
+            </div>
+          </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-5 col-sm-4">
+          <button type="button" class="btn btn-primary btn-lg" onclick="nextTab(event,'step2');">上一步</button>
+          <button type="submit" class="btn btn-primary btn-lg">註冊</button>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+
+
+  <script>
+
+  var setp2FormData;
+
+    $('#twzipcode').twzipcode({
+      'css': ['form-control county', 'form-control district', 'form-control zipcode']
+    });
+
+    function nextTab(e,showTabId) {
+      e.preventDefault();
+
+      if(showTabId=='step3'){
+        if (!$('#step2Form')[0].checkValidity()) {
+            var form = document.getElementById('step2Form');
+            form.querySelectorAll('input[type="submit"]')[0].click();
+            return false;
+        }
+        else{
+            setp2FormData = $("#step2Form").serialize();
+
+        }      
+      }
+
+       //-------------tab切換 參考w3cschoo的tab javascript---------------------
+
+      var x = document.getElementsByClassName("step");
+
+      for (var i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+
+      document.getElementById(showTabId).style.display = "block";
+
+
+      var activeLi = document.getElementsByClassName("active")[0];
+      activeLi.className = activeLi.className.replace("active", "");
+
+      var nextLi = document.getElementsByClassName(showTabId)[0];
+      nextLi.className = nextLi.className + " active";
+
+      //-------------tab切換 參考w3cschoo的tab javascript--------------------- end
+
+
+
+    }
+
+    
+      $("#step3Form").on('submit',function(e){
+          e.preventDefault();
+          // e.stopImmediatePropagation();
+                alert('qq');
+
+          // //step2FormData , start
+          //   $.ajax({
                 
-                <div class="form-group">
-                    <label class="control-label col-sm-4" for="username">名字</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="name" id="name" placeholder="輸入名字">
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label class="control-label col-sm-4" for="username">備註</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="memo" id="memo" placeholder="輸入備註" >
-                    </div>
-                </div>
+          //       url : 'api/personalInfo',
+          //       type: "POST",
+          //       processData: false,
+          //       data:setp2FormData,            
+          //       success: function (data) {
+          //       },
+          //       error: function (jXHR, textStatus, errorThrown) {
+          //       },
+          //       complete:function(){
+          //       }
+          //   });
+          
+          // //step2FormData , end
 
-                <div class="form-group"> 
-                    <div class="col-sm-offset-5 col-sm-4">
-                     <button type="submit" class="btn btn-default btn-lg">註冊</button>
-                    </div>
-                </div>
-            </form>
-</div>
+                $.ajax({
+                
+                url : 'api/signup',
+                type: "POST",
+                processData: false,
+                data:$("#step3Form").serialize(),            
+                success: function (data) {
+                  alert('yes');
+                },
+                error: function (jXHR, textStatus, errorThrown) {
+                  alert('ohoh');
+                },
+                complete:function(){
+                }
+            });
+            return false;
+          
+      });
+
+
+      
+     
+
+  </script>
+  <style>
+    .iCage_setpBox li.active {
+      background: #0088d2;
+      color: #fff;
+      border: 1px solid #ccc;
+    }
+    
+    .iCage_setpBox {
+      width: 100%;
+      display: table;
+      padding-left: 0px;
+      margin-top: 10vh;
+    }
+    
+    .iCage_setpBox li .wrp {
+      padding: 6px 0 6px 20px;
+      display: block;
+      position: relative;
+    }
+    
+    .iCage_setpBox li .md {
+      display: none;
+    }
+    
+    .iCage_setpBox li.active .arr {
+      background: url(//az806038.vo.msecnd.net/images/bg/arr03.png?1449813514) no-repeat 0 -33px;
+    }
+    
+    .iCage_setpBox li.active {
+      background: #0088d2;
+      color: #fff;
+      border: 1px solid #ccc;
+    }
+    
+    .iCage_setpBox li {
+      width: 1%;
+      display: table-cell;
+      border: 1px solid #ccc;
+    }
+    
+    .iCage_setpBox li.active .arr {
+      background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAABCBAMAAABDWSCQAAAAFVBMVEUzMzPMzMz4+Pj///8AiNLMzMz4+PiXsQc/AAAABHRSTlMAAAAAs5NmmgAAAJNJREFUeF5lzMENg1AMBNEtATpICYnSwnLHoga7/xKCZf5csqfRk2XFPtuUVAWVVAWVVAWVVAWVVAWVVAWVVAWVVJ3Ya9X11kPfdXd97hrqf0NdQ3cNdQ11DXUNdTVNNU01TTVNNT2ltWNb5aBAgwYNGjRo0KBBgwYNGvSz899i1bGvil2CBAkSJEiQIEGCBAkS9APm3HKPrdjszgAAAABJRU5ErkJggg==') no-repeat 0 -33px;
+    }
+    
+    .iCage_setpBox li .arr {
+      background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAABCBAMAAABDWSCQAAAAFVBMVEUzMzPMzMz4+Pj///8AiNLMzMz4+PiXsQc/AAAABHRSTlMAAAAAs5NmmgAAAJNJREFUeF5lzMENg1AMBNEtATpICYnSwnLHoga7/xKCZf5csqfRk2XFPtuUVAWVVAWVVAWVVAWVVAWVVAWVVAWVVJ3Ya9X11kPfdXd97hrqf0NdQ3cNdQ11DXUNdTVNNU01TTVNNT2ltWNb5aBAgwYNGjRo0KBBgwYNGvSz899i1bGvil2CBAkSJEiQIEGCBAkS9APm3HKPrdjszgAAAABJRU5ErkJggg==') no-repeat 0 0;
+      width: 17px;
+      height: 34px;
+      position: absolute;
+      z-index: 100;
+      display: block;
+      overflow: hidden;
+      right: -17px;
+      top: -1px;
+    }
+    
+    .container-narrow {
+      padding-right: 30px;
+      padding-left: 30px;
+    }
+    
+    .form-group {
+      margin-top: 15px;
+    }
+    
+    .box {
+      height: 50vh;
+      overflow: scroll;
+      margin: 0 30px 0 30px;
+      border: 1px solid gray;
+    }
+    
+    .box2 {
+      overflow: scroll;
+      margin: 0 30px 0 30px;
+      border: 1px solid gray;
+    }
+    
+    .zipcode,
+    .county,
+    .district {
+      width: 9rem;
+      display: inline-block;
+      margin-right: 4px;
+    }
+    
+    .must {
+      color: red;
+    }
+
+  </style>
 </body>
+
 </html>

@@ -34,31 +34,31 @@ module.exports = function (app, config) {
   app.use(compress());
   app.use(methodOverride());
 
-  // //// login logout signup start ===============================
+  //// login logout signup start ===============================
 
-  //   app.use(session({
+    app.use(session({
 
-  //       secret: '123456',
+        secret: '123456',
 
-  //       name: 'cookie-name',
+        name: 'cookie-name',
 
-  //       // store: sessionStore, // connect-mongo session store
+        // store: sessionStore, // connect-mongo session store
 
-  //       proxy: true,
+        proxy: true,
 
-  //       resave: true,
+        resave: true,
 
-  //       saveUninitialized: true
+        saveUninitialized: true
 
-  //   }));
+    }));
 
-  // app.get('/login',function(req,res){
-  //   res.sendFile('login.html', { root: config.root + '/public' });
-  // });
+  app.get('/login',function(req,res){
+    res.sendFile('login.html', { root: config.root + '/public' });
+  });
 
-  // app.get('/signup',function(req,res){
-  //   res.sendFile('signup.html', { root: config.root + '/public' });
-  // });
+  app.get('/signup',function(req,res){
+    res.sendFile('signup.html', { root: config.root + '/public' });
+  });
 
 
   // app.post('/login',function(req,res){
@@ -71,29 +71,32 @@ module.exports = function (app, config) {
   //    }
   // });
 
-  // app.get('/logout',function(req,res){
+  app.get('/logout',function(req,res){
 
-  //     req.session.login = false;
-  //      req.session.admin = false;
-  //      res.redirect('/');
-  // });
+      req.session.login = false;
+       req.session.admin = false;
+       res.redirect('/');
+  });
 
-  // app.use('*',function isLoggedIn(req, res, next) {
+  app.use('*',function isLoggedIn(req, res, next) {
+      // console.log('req.path',req.baseUrl,'req.method',req.method);
+      if(req.baseUrl =='/api/signup'&&req.method=='POST'||req.baseUrl =='/api/login'&&req.method=='POST'){
+        return next();
+      }
 
-  //     // console.log('req.path',req.baseUrl,'req.method',req.method);
-  //     if(req.baseUrl =='/api/signup'&&req.method=='POST'||req.baseUrl =='/api/login'&&req.method=='POST'){
-  //       return next();
-  //     }
+       if(req.baseUrl.startsWith('/js/')||req.baseUrl.startsWith('/css/')){
+        return next();
+      }
 
-  //     // if user is authenticated in the session, carry on
-  //     if (req.session.login)
-  //         return next();
+      // if user is authenticated in the session, carry on
+      if (req.session.login)
+          return next();
 
-  //     // if they aren't redirect them to the home page
-  //     res.redirect('/login');
-  // });
+      // if they aren't redirect them to the home page
+      res.redirect('/login');
+  });
 
-  // //// login logout signup end ===============================
+  //// login logout signup end ===============================
 
   app.use('/', express.static(config.root + '/public'));
 
