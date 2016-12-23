@@ -8,10 +8,6 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    customerId: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
     animalNo: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -56,6 +52,10 @@ module.exports = function(sequelize, DataTypes) {
     iacuc: {
       type: DataTypes.STRING,
       allowNull: true
+    },
+    customerId:{
+      type: DataTypes.INTEGER,
+      allowNull: true,
     }
     
   }, {

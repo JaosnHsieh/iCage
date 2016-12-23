@@ -31,7 +31,11 @@ module.exports = function(sequelize, DataTypes) {
     memo: {
       type: DataTypes.STRING,
       allowNull: true
-    }
+    },
+    customerId:{
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
     
   }, {
     tableName: 'AnimalLog'

@@ -11,7 +11,12 @@ module.exports = function(sequelize, DataTypes) {
     data: {
       type: DataTypes.TEXT,
       allowNull: true
-    }
+    },
+    customerId:{
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    
   }, {
     tableName: 'Vibrate'
   });
